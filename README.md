@@ -24,7 +24,8 @@ O Etiquete busca evitar problemas comuns em vendas de ingressos de alta demanda,
 | NodeJS + React | Frameworks de aplicação para backend e frontend |
 | PostgreSQL | Banco de dados relacional com transações ACID |
 | Redis | Banco de dados em memória para cache e dados com expiração |
-| RabbitMQ | Message broker para filas e eventos entre serviços |
+| Kafka | Message broker para eventos entre os serviços |
+| Nginx | Gateway HTTP local na frente dos microsserviços |
 | Docker Compose | Orquestração de contêineres para execução local |
 | GitHub Actions | Plataforma de CI/CD integrada ao GitHub |
 | Testcontainers | Biblioteca para subir dependências reais em contêineres nos testes |
@@ -32,6 +33,28 @@ O Etiquete busca evitar problemas comuns em vendas de ingressos de alta demanda,
 | Grafana | Plataforma de dashboards e visualização de métricas |
 
 *A stack definitiva será confirmada durante o desenvolvimento do projeto.*
+
+## Execução local
+
+Sobe PostgreSQL, Kafka e Nginx:
+
+```bash
+docker compose up -d
+```
+
+Para e remove os containers. Os volumes permanecem, então os dados do PostgreSQL e do Kafka continuam na próxima subida:
+
+```bash
+docker compose down
+```
+
+| Serviço | Endereço no host | Entre contêineres |
+|---|---|---|
+| Nginx | http://localhost:8080 | — |
+| Kafka | localhost:9092 | kafka:9092 |
+| PostgreSQL | localhost:5432 | postgres:5432 |
+
+`GET /health` no Nginx responde `{"status":"ok"}`. Na primeira subida, o PostgreSQL cria os bancos `catalog`, `reservation`, `orders`, `payment` e `notification`. Usuário e senha de desenvolvimento ficam em `.env.example` (padrão `etiquete` / `etiquete`).
 
 ## Padrões arquiteturais
 
