@@ -1,0 +1,92 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Build and validate containers
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+
+      - name: Build application images
+        run: docker compose build frontend backend
+
+      - name: Start application stack
+        run: docker compose up -d
+
+      - name: Check gateway health
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8080/health; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose logs
+          exit 1
+
+      - name: Stop application stack
+        if: always()
+        run: docker compose down --volumes
+
+  deploy:
+    name: Deploy to production server
+    needs: validate
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check required deployment secrets
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+        run: |
+          for variable in SERVER_HOST SERVER_USER SERVER_SSH_KEY SERVER_KNOWN_HOSTS; do
+            if [ -z "${!variable}" ]; then
+              echo "::error::Secret $variable is not configured in the production environment."
+              exit 1
+            fi
+          done
+
+      - name: Deploy on server via SSH
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
+          SERVER_APP_DIR: ${{ secrets.SERVER_APP_DIR }}
+        run: |
+          set -eu
+          app_dir="${SERVER_APP_DIR:-/opt/etiquete}"
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s\n' "$SERVER_SSH_KEY" > "$HOME/.ssh/id_ed25519"
+          printf '%s\n' "$SERVER_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/id_ed25519" "$HOME/.ssh/known_hosts"
+
+          ssh -i "$HOME/.ssh/id_ed25519" \
+            "$SERVER_USER@$SERVER_HOST" \
+            "set -eu
+             test -d '$app_dir'
+             cd '$app_dir'
+             git fetch origin main
+             git checkout main
+             git reset --hard origin/main
+             docker compose up -d --build --remove-orphans
+             docker compose ps"

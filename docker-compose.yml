@@ -10,7 +10,6 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: DockerFile
     restart: unless-stopped
     expose:
       - "3000"
@@ -21,6 +20,7 @@ services:
       retries: 5
     networks:
       - etiquete
+
   postgres:
     image: postgres:16-alpine
     container_name: etiquete-postgres
