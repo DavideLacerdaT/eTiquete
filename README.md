@@ -67,3 +67,9 @@ O projeto adota os seguintes padrões para garantir a confiabilidade e a coorden
 ## Status
 
 Em desenvolvimento.
+
+## GitHub Actions
+
+O workflow [`deploy.yml`](.github/workflows/deploy.yml) atualmente apenas valida o Compose, constrói as imagens dos serviços e verifica a saúde da aplicação em um runner do GitHub Actions. Não há deploy automático para servidor neste momento.
+
+As imagens construídas são as imagens locais dos serviços `frontend` e `backend`, definidos no [`docker-compose.yml`](docker-compose.yml). PostgreSQL, Kafka e Nginx utilizam imagens oficiais do Docker Hub.
