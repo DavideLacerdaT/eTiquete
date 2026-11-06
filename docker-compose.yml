@@ -1,9 +1,26 @@
 services:
   frontend:
     build: ./frontend
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      - etiquete
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: DockerFile
+    restart: unless-stopped
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - etiquete
   postgres:
     image: postgres:16-alpine
     container_name: etiquete-postgres

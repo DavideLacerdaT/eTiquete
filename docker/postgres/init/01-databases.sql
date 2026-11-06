@@ -1,5 +1,0 @@
-CREATE DATABASE catalog;
-CREATE DATABASE reservation;
-CREATE DATABASE orders;
-CREATE DATABASE payment;
-CREATE DATABASE notification;

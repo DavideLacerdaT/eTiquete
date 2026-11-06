@@ -34,7 +34,7 @@ O Etiquete busca evitar problemas comuns em vendas de ingressos de alta demanda,
 
 *A stack definitiva será confirmada durante o desenvolvimento do projeto.*
 
-## Execução local
+## Execução local e deploy
 
 Sobe PostgreSQL, Kafka e Nginx:
 
@@ -55,6 +55,33 @@ docker compose down
 | PostgreSQL | localhost:5432 | postgres:5432 |
 
 `GET /health` no Nginx responde `{"status":"ok"}`. Na primeira subida, o PostgreSQL cria os bancos `catalog`, `reservation`, `orders`, `payment` e `notification`. Usuário e senha de desenvolvimento ficam em `.env.example` (padrão `etiquete` / `etiquete`).
+
+### Deploy automático
+
+O workflow [`deploy.yml`](.github/workflows/deploy.yml) valida o Compose, constrói as imagens, sobe a stack e verifica `GET /health` antes do deploy. Pushes em `main` e execuções manuais (`workflow_dispatch`) fazem o deploy no ambiente `production`; pull requests executam apenas a validação.
+
+O servidor precisa ter Git, Docker com o plugin Compose, acesso de leitura ao repositório e uma cópia inicial do projeto em `/opt/etiquete` (ou no diretório definido por `SERVER_APP_DIR`). A cópia inicial pode ser preparada assim:
+
+```bash
+sudo mkdir -p /opt/etiquete
+sudo chown "$USER:$USER" /opt/etiquete
+git clone <url-do-repositorio> /opt/etiquete
+cd /opt/etiquete
+cp .env.example .env
+docker compose up -d
+```
+
+Configure estes secrets no ambiente `production` do GitHub:
+
+| Secret | Valor |
+|---|---|
+| `SERVER_HOST` | Hostname ou IP do servidor |
+| `SERVER_USER` | Usuário SSH com permissão para executar Docker |
+| `SERVER_SSH_KEY` | Chave privada Ed25519 usada pelo Actions |
+| `SERVER_KNOWN_HOSTS` | Saída de `ssh-keyscan -H <host>` |
+| `SERVER_APP_DIR` | Opcional; diretório do projeto, padrão `/opt/etiquete` |
+
+Não coloque chaves, senhas ou o arquivo `.env` no repositório. Para conferir o serviço após o deploy, use `curl http://<host>:8080/health`.
 
 ## Padrões arquiteturais
 
