@@ -1,4 +1,9 @@
 services:
+  frontend:
+    build: ./frontend
+
+  backend:
+    build: ./backend
   postgres:
     image: postgres:16-alpine
     container_name: etiquete-postgres
