@@ -1,28 +1,23 @@
-name: Deploy
+name: Build Docker images
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  deploy:
+  build:
+    name: Build frontend and backend
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
-      - name: Deploy no servidor via SSH
-        env:
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
-        run: |
-          install -m 700 -d ~/.ssh
-          printf '%s\n' "$SERVER_SSH_KEY" > ~/.ssh/id_ed25519
-          printf '%s\n' "$SERVER_KNOWN_HOSTS" > ~/.ssh/known_hosts
-          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+      - name: Check out repository
+        uses: actions/checkout@v6
 
-          ssh "$SERVER_USER@$SERVER_HOST" \
-            'cd /opt/etiquete &&
-             git pull --ff-only origin main &&
-             docker compose up -d --build'
+      - name: Build application images
+        run: docker compose build frontend backend
