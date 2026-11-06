@@ -17,6 +17,11 @@ jobs:
           SERVER_SSH_KEY: ${{ secrets.SERVER_SSH_KEY }}
           SERVER_KNOWN_HOSTS: ${{ secrets.SERVER_KNOWN_HOSTS }}
         run: |
+          if [ -z "$SERVER_HOST" ] || [ -z "$SERVER_USER" ] || [ -z "$SERVER_SSH_KEY" ] || [ -z "$SERVER_KNOWN_HOSTS" ]; then
+            echo "::warning title=Deploy skipped::Set SERVER_HOST, SERVER_USER, SERVER_SSH_KEY and SERVER_KNOWN_HOSTS secrets to enable deployment."
+            exit 0
+          fi
+
           install -m 700 -d ~/.ssh
           printf '%s\n' "$SERVER_SSH_KEY" > ~/.ssh/id_ed25519
           printf '%s\n' "$SERVER_KNOWN_HOSTS" > ~/.ssh/known_hosts
