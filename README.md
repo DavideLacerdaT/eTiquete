@@ -1,99 +1,68 @@
-# E-Tiquete
+# eTiquete
 
-Este sistema será desenvolvido como projeto final da disciplina de Engenharia de Sistemas Distribuídos. O E-tiquete é uma plataforma de venda e reserva de ingressos desenvolvida com arquitetura de microsserviços, com foco em confiabilidade e desempenho.
+Este sistema está sendo desenvolvido como projeto final da disciplina de Engenharia de Sistemas Distribuídos. O E-Tiquete é uma plataforma de venda e reserva de ingressos baseada em uma arquitetura de microsserviços, com foco em confiabilidade, concorrência e desempenho.
 
 ## Sobre o projeto
 
-O Etiquete busca evitar problemas comuns em vendas de ingressos de alta demanda, como venda duplicada de assentos, cobranças em duplicidade e reservas abandonadas. A plataforma permitirá consultar eventos, reservar assentos temporariamente, realizar pagamentos simulados e receber confirmações. Em caso de falha no pagamento ou expiração da reserva, o sistema deverá liberar o assento automaticamente.
+O eTiquete busca evitar problemas comuns em vendas de ingressos de alta demanda, como venda duplicada de assentos, cobranças em duplicidade e reservas abandonadas.
 
-**Serviços previstos:** API Gateway, Catálogo de Eventos, Reserva de Assentos, Pedidos (orquestrador da SAGA), Pagamento (simulado) e Notificações.
+A plataforma permite consultar eventos, selecionar e reservar assentos temporariamente, realizar pagamentos simulados e acompanhar a confirmação da compra. Também conta com um mecanismo de fila de espera e controle de admissão ao checkout, limitando a quantidade de usuários que acessam simultaneamente o processo de compra.
+
+Em caso de falha no pagamento ou expiração da reserva, o sistema executa ações compensatórias para liberar os assentos e, quando necessário, estornar pagamentos.
+
+**Serviços e componentes:** Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos (orquestrador da SAGA), Pagamento Simulado, Notificações, Redis e Barramento de Mensagens.
 
 ## Objetivos
 
 - Evitar a venda duplicada de assentos.
 - Garantir a idempotência das operações de pagamento.
 - Liberar reservas expiradas automaticamente.
+- Controlar o acesso simultâneo ao checkout por meio de fila de espera.
 - Manter a disponibilidade dos serviços diante de falhas.
 - Monitorar o desempenho sob alta concorrência.
 - Garantir a entrega confiável de eventos entre os serviços.
 
-## Tecnologias previstas
+## Tecnologias
 
 | Tecnologia | Descrição |
 |---|---|
-| NodeJS + React | Frameworks de aplicação para backend e frontend |
-| PostgreSQL | Banco de dados relacional com transações ACID |
-| Redis | Banco de dados em memória para cache e dados com expiração |
-| Kafka | Message broker para eventos entre os serviços |
-| Nginx | Gateway HTTP local na frente dos microsserviços |
-| Docker Compose | Orquestração de contêineres para execução local |
-| GitHub Actions | Plataforma de CI/CD integrada ao GitHub |
-| Testcontainers | Biblioteca para subir dependências reais em contêineres nos testes |
-| Prometheus | Sistema de coleta e armazenamento de métricas |
-| Grafana | Plataforma de dashboards e visualização de métricas |
+| Node.js + React | Desenvolvimento dos microsserviços e da interface web. |
+| PostgreSQL | Banco de dados relacional, com persistência exclusiva por serviço. |
+| Redis | Cache do catálogo e gerenciamento de tokens temporários da fila de espera. |
+| RabbitMQ | Barramento de mensagens para comunicação assíncrona entre os serviços. |
+| Docker Compose | Execução e integração dos serviços e suas dependências em contêineres. |
+| GitHub Actions | Automação de verificações, testes e builds. |
+| Testcontainers | Execução de testes de integração com dependências reais em contêineres. |
+| Prometheus | Coleta e armazenamento de métricas dos serviços. |
+| Grafana | Dashboards e visualização de métricas para monitoramento. |
 
-*A stack definitiva será confirmada durante o desenvolvimento do projeto.*
+## Execução local
 
-## Execução local e deploy
-
-Sobe PostgreSQL, Kafka e Nginx:
+Para iniciar os contêineres e suas dependências:
 
 ```bash
 docker compose up -d
 ```
 
-Para e remove os containers. Os volumes permanecem, então os dados do PostgreSQL e do Kafka continuam na próxima subida:
+Para interromper e remover os contêineres, preservando os volumes:
 
 ```bash
 docker compose down
 ```
 
-| Serviço | Endereço no host | Entre contêineres |
-|---|---|---|
-| Nginx | http://localhost:8080 | — |
-| Kafka | localhost:9092 | kafka:9092 |
-| PostgreSQL | localhost:5432 | postgres:5432 |
-
-`GET /health` no Nginx responde `{"status":"ok"}`. Na primeira subida, o PostgreSQL cria os bancos `catalog`, `reservation`, `orders`, `payment` e `notification`. Usuário e senha de desenvolvimento ficam em `.env.example` (padrão `etiquete` / `etiquete`).
-
-### Deploy automático
-
-O workflow [`deploy.yml`](.github/workflows/deploy.yml) valida o Compose, constrói as imagens, sobe a stack e verifica `GET /health` antes do deploy. Pushes em `main` e execuções manuais (`workflow_dispatch`) fazem o deploy no ambiente `production`; pull requests executam apenas a validação.
-
-O servidor precisa ter Git, Docker com o plugin Compose, acesso de leitura ao repositório e uma cópia inicial do projeto em `/opt/etiquete` (ou no diretório definido por `SERVER_APP_DIR`). A cópia inicial pode ser preparada assim:
-
-```bash
-sudo mkdir -p /opt/etiquete
-sudo chown "$USER:$USER" /opt/etiquete
-git clone <url-do-repositorio> /opt/etiquete
-cd /opt/etiquete
-cp .env.example .env
-docker compose up -d
-```
-
-Configure estes secrets no ambiente `production` do GitHub:
-
-| Secret | Valor |
-|---|---|
-| `SERVER_HOST` | Hostname ou IP do servidor |
-| `SERVER_USER` | Usuário SSH com permissão para executar Docker |
-| `SERVER_SSH_KEY` | Chave privada Ed25519 usada pelo Actions |
-| `SERVER_KNOWN_HOSTS` | Saída de `ssh-keyscan -H <host>` |
-| `SERVER_APP_DIR` | Opcional; diretório do projeto, padrão `/opt/etiquete` |
-
-Não coloque chaves, senhas ou o arquivo `.env` no repositório. Para conferir o serviço após o deploy, use `curl http://<host>:8080/health`.
+As configurações de execução e credenciais de desenvolvimento devem ser consultadas no arquivo `.env.example`.
 
 ## Padrões arquiteturais
 
-Os seguintes padrões serão implementados para validar a proposta do projeto:
+O projeto adota os seguintes padrões para garantir a confiabilidade e a coordenação das operações distribuídas:
 
-- SAGA (orquestração)
-- Transactional Outbox
-- Retry e DLQ
-- Circuit Breaker
-- Cache-Aside
-- Database-per-service
-- API Gateway
+- **SAGA (orquestração):** coordenação das etapas da compra pelo serviço de Pedidos, com ações compensatórias em caso de falhas.
+- **Transactional Outbox:** registro das alterações e mensagens a publicar na mesma transação do banco de dados.
+- **Retry e DLQ:** novas tentativas de processamento e encaminhamento de mensagens não processadas para uma fila de mensagens não entregues.
+- **Circuit Breaker:** interrupção temporária de chamadas a serviços com falhas recorrentes.
+- **API Gateway:** ponto de entrada para as requisições dos clientes e encaminhamento aos serviços responsáveis.
+- **Cache-Aside:** utilização de cache para reduzir consultas repetidas ao banco de dados.
+- **Database-per-service:** isolamento dos dados, com banco ou esquema exclusivo para cada microsserviço.
 
 ## Status
 
