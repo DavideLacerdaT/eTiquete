@@ -50,6 +50,18 @@ Para interromper e remover os contêineres, preservando os volumes:
 docker compose down
 ```
 
+O Compose sobe hoje:
+
+| Serviço | Endereço |
+|---|---|
+| Frontend | http://localhost:8080/ |
+| Backend | http://localhost:8080/api/ |
+| Saúde do Nginx | http://localhost:8080/health |
+| PostgreSQL | localhost:5432 |
+| Kafka | localhost:9092 na máquina; kafka:9092 entre contêineres |
+
+`frontend` e `backend` são imagens construídas no repositório. O broker decidido no relatório é o RabbitMQ; o Kafka é a infraestrutura que já está no ar.
+
 As configurações de execução e credenciais de desenvolvimento devem ser consultadas no arquivo `.env.example`.
 
 ## Padrões arquiteturais
