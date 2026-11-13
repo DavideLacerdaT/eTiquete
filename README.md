@@ -29,7 +29,7 @@ Em caso de falha no pagamento ou expiração da reserva, o sistema executa açõ
 | Node.js + React | Desenvolvimento dos microsserviços e da interface web. |
 | PostgreSQL | Banco de dados relacional, com persistência exclusiva por serviço. |
 | Redis | Cache do catálogo e gerenciamento de tokens temporários da fila de espera. |
-| RabbitMQ | Barramento de mensagens para comunicação assíncrona entre os serviços. |
+| Kafka | Barramento de mensagens para comunicação assíncrona entre os serviços da SAGA. |
 | Docker Compose | Execução e integração dos serviços e suas dependências em contêineres. |
 | GitHub Actions | Automação de verificações, testes e builds. |
 | Testcontainers | Execução de testes de integração com dependências reais em contêineres. |
@@ -60,7 +60,7 @@ O Compose sobe hoje:
 | PostgreSQL | localhost:5432 |
 | Kafka | localhost:9092 na máquina; kafka:9092 entre contêineres |
 
-`frontend` e `backend` são imagens construídas no repositório. O broker decidido no relatório é o RabbitMQ; o Kafka é a infraestrutura que já está no ar.
+`frontend` e `backend` são imagens construídas no repositório. O Kafka é o broker oficial da arquitetura e já sobe com o Compose.
 
 As configurações de execução e credenciais de desenvolvimento devem ser consultadas no arquivo `.env.example`.
 
@@ -70,7 +70,7 @@ O projeto adota os seguintes padrões para garantir a confiabilidade e a coorden
 
 - **SAGA (orquestração):** coordenação das etapas da compra pelo serviço de Pedidos, com ações compensatórias em caso de falhas.
 - **Transactional Outbox:** registro das alterações e mensagens a publicar na mesma transação do banco de dados.
-- **Retry e DLQ:** novas tentativas de processamento e encaminhamento de mensagens não processadas para uma fila de mensagens não entregues.
+- **Retry e dead letter topic (DLT):** novas tentativas de processamento e encaminhamento de mensagens que esgotaram as tentativas para um tópico de mensagens não entregues.
 - **Circuit Breaker:** interrupção temporária de chamadas a serviços com falhas recorrentes.
 - **API Gateway:** ponto de entrada para as requisições dos clientes e encaminhamento aos serviços responsáveis.
 - **Cache-Aside:** utilização de cache para reduzir consultas repetidas ao banco de dados.
