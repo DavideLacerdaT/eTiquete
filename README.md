@@ -133,3 +133,15 @@ Em desenvolvimento.
 O workflow [`deploy.yml`](.github/workflows/deploy.yml) atualmente apenas valida o Compose, constrói as imagens dos serviços e verifica a saúde da aplicação em um runner do GitHub Actions. Não há deploy automático para servidor neste momento.
 
 As imagens construídas são as imagens locais dos serviços `frontend` e `backend`, definidos no [`docker-compose.yml`](docker-compose.yml). PostgreSQL, Kafka e Nginx utilizam imagens oficiais do Docker Hub.
+
+## Declaração de uso de IA
+
+O grupo usou o Cursor, com o agente de código, para organizar a entrega a partir do relatório em [`entregas/Etiquete_entrega_2.pdf`](entregas/Etiquete_entrega_2.pdf).
+
+**Ferramenta:** Cursor (agente de código).
+
+**Trecho:** decisão sugerida para o [ADR 0002](docs/adr/0002-saga-orquestrada-kafka.md): o serviço de Pedidos orquestra a SAGA, e o Kafka leva as mensagens entre pedidos, reservas, pagamento e notificações, com tópico durável, confirmação, retry e dead letter topic (DLT).
+
+**O que o grupo alterou:** Kafka ficou como único broker, e RabbitMQ só como alternativa descartada. Redis, Prometheus, Grafana e Testcontainers foram marcados como planejados, porque não sobem no Compose. No C4 nível 1, o pagamento simulado permaneceu dentro do sistema, como no PDF. A linha do Rafael em [`docs/equipe.md`](docs/equipe.md) cita Kafka e DLT. Nomes e entregas práticas foram conferidos com a página 4.
+
+**Avaliação:** a ferramenta passou o relatório para arquivos abertos no repositório. O desenho automático do Mermaid embaralhou setas do nível 2, e uma versão da stack descreveu Redis, Prometheus, Grafana e Testcontainers como se já existissem. O grupo reviu os rótulos, alinhou o broker ao Compose e deixou como planejado o que ainda não está no repositório.
