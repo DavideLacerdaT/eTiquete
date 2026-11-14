@@ -104,6 +104,11 @@ O projeto adota os seguintes padrões para garantir a confiabilidade e a coorden
 - **Cache-Aside:** utilização de cache para reduzir consultas repetidas ao banco de dados.
 - **Database-per-service:** isolamento dos dados, com banco ou esquema exclusivo para cada microsserviço.
 
+As decisões aceitas, com a alternativa descartada e o motivo, estão em:
+
+- [ADR 0001 — Banco exclusivo por serviço](docs/adr/0001-banco-exclusivo-por-servico.md)
+- [ADR 0002 — SAGA orquestrada com Kafka](docs/adr/0002-saga-orquestrada-kafka.md)
+
 ## Status
 
 Em desenvolvimento.
