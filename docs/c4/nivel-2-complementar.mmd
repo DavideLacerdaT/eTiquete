@@ -1,0 +1,49 @@
+%% eTIQUETE | C4 Nível 2 — Vista complementar dos mesmos contêineres de aplicação
+%% Observabilidade: Equipe técnica, Grafana, Prometheus e GET /metrics.
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "15px", "fontFamily": "Segoe UI, Arial, sans-serif"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 32, "rankSpacing": 46, "padding": 12}}}%%
+
+flowchart TB
+    equipe["<b>Equipe técnica</b><br/>Pessoa<br/>Acompanha métricas e falhas."]
+
+    subgraph sistema["eTIQUETE · Sistema de software"]
+        direction TB
+
+        subgraph painel["Observabilidade"]
+            direction LR
+            grafana["<b>Grafana</b><br/>Container · Grafana<br/>Dashboards de desempenho<br/>e confiabilidade."]
+            prometheus[("<b>Prometheus</b><br/>Container · Prometheus<br/>Coleta e armazena métricas<br/>dos serviços Node.js.")]
+            grafana -->|"Consulta métricas<br/>PromQL / HTTP"| prometheus
+        end
+
+        subgraph servicos["Mesmos contêineres de aplicação"]
+            direction LR
+            gateway["<b>API Gateway</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            admissao["<b>Admissão</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            catalogo["<b>Catálogo de Eventos</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            reserva["<b>Reserva de Assentos</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            pedidos["<b>Pedidos / SAGA</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            pagamento["<b>Pagamento simulado</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+            notificacoes["<b>Notificações</b><br/>Container · Node.js<br/>Expõe métricas da aplicação."]
+        end
+    end
+
+    equipe -->|"Consulta dashboards · HTTP"| grafana
+
+    prometheus -->|"GET /metrics"| gateway
+    prometheus -->|"GET /metrics"| admissao
+    prometheus -->|"GET /metrics"| catalogo
+    prometheus -->|"GET /metrics"| reserva
+    prometheus -->|"GET /metrics"| pedidos
+    prometheus -->|"GET /metrics"| pagamento
+    prometheus -->|"GET /metrics"| notificacoes
+
+    classDef pessoa fill:#0B3A5B,stroke:#0B3A5B,color:#ffffff
+    classDef app fill:#438DD5,stroke:#2E6298,color:#ffffff
+    classDef dados fill:#E7F6EE,stroke:#2E7D4F,color:#143024
+    class equipe pessoa
+    class grafana,gateway,admissao,catalogo,reserva,pedidos,pagamento,notificacoes app
+    class prometheus dados
+
+    style sistema fill:#F4F8FC,stroke:#8FB4D6,stroke-width:1px
+    style painel fill:#ffffff,stroke:#D5E3F0
+    style servicos fill:#ffffff,stroke:#D5E3F0

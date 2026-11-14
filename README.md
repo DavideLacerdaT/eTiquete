@@ -64,6 +64,34 @@ O Compose sobe hoje:
 
 As configurações de execução e credenciais de desenvolvimento devem ser consultadas no arquivo `.env.example`.
 
+## Diagramas C4
+
+Os três diagramas da entrega 2. A fonte editável é Mermaid; a figura abaixo é o PNG gerado a partir dela. No nível 1 há uma única caixa de sistema, cercada por pessoas. O pagamento simulado é contêiner interno da compra. O barramento é Kafka.
+
+### Nível 1 — Pessoas e escopo da plataforma
+
+Cliente e Equipe técnica usam o eTIQUETE. As setas levam rótulo.
+
+![C4 nível 1: pessoas e escopo da plataforma](docs/c4/nivel-1.png)
+
+Fonte: [`docs/c4/nivel-1.mmd`](docs/c4/nivel-1.mmd)
+
+### Nível 2 — Vista principal da compra e coordenação distribuída
+
+Contêineres da compra: Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos / SAGA, Pagamento simulado e Notificações. Redis guarda a fila e o cache. Cada serviço tem o próprio PostgreSQL. O barramento Kafka leva reserva, orquestração da SAGA, cobrança e confirmação.
+
+![C4 nível 2: compra e coordenação distribuída](docs/c4/nivel-2-compra.png)
+
+Fonte: [`docs/c4/nivel-2-compra.mmd`](docs/c4/nivel-2-compra.mmd)
+
+### Nível 2 — Vista complementar dos mesmos contêineres de aplicação
+
+A Equipe técnica consulta o Grafana. O Prometheus coleta `GET /metrics` do gateway, da admissão, do catálogo, da reserva, dos pedidos, do pagamento simulado e das notificações.
+
+![C4 nível 2: observabilidade dos mesmos contêineres](docs/c4/nivel-2-complementar.png)
+
+Fonte: [`docs/c4/nivel-2-complementar.mmd`](docs/c4/nivel-2-complementar.mmd)
+
 ## Padrões arquiteturais
 
 O projeto adota os seguintes padrões para garantir a confiabilidade e a coordenação das operações distribuídas:

@@ -1,0 +1,80 @@
+%% eTIQUETE | C4 Nível 2 — Vista principal da compra e coordenação distribuída
+%% Pagamento simulado é contêiner interno. Barramento é Kafka, alinhado ao Compose.
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "15px", "fontFamily": "Segoe UI, Arial, sans-serif"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 36, "rankSpacing": 48, "padding": 12}}}%%
+
+flowchart TB
+    cliente["<b>Cliente</b><br/>Pessoa<br/>Compra e acompanha ingressos."]
+
+    subgraph sistema["eTIQUETE · Sistema de software"]
+        direction TB
+
+        subgraph entrada["Entrada da compra"]
+            direction LR
+            web["<b>Aplicação Web</b><br/>Container · React<br/>Eventos, fila de espera,<br/>assentos, checkout e status."]
+            gateway["<b>API Gateway</b><br/>Container · Node.js<br/>Entrada única das APIs;<br/>roteamento e Circuit Breaker."]
+            admissao["<b>Admissão</b><br/>Container · Node.js<br/>Fila de espera e controle<br/>de entrada no checkout."]
+            redis[("<b>Redis</b><br/>Container · Redis<br/>Fila e tokens com TTL;<br/>cache do catálogo.")]
+            web -->|"HTTPS/JSON"| gateway
+            gateway -->|"Valida admissão<br/>HTTP/JSON"| admissao
+            admissao -->|"Gerencia fila e tokens<br/>Redis RESP"| redis
+        end
+
+        subgraph aplicacao["Contêineres da compra"]
+            direction LR
+            catalogo["<b>Catálogo de Eventos</b><br/>Container · Node.js<br/>Consulta eventos e sessões.<br/>Aplica Cache-Aside."]
+            reserva["<b>Reserva de Assentos</b><br/>Container · Node.js<br/>Disponibilidade, reserva,<br/>expiração e confirmação."]
+            pedidos["<b>Pedidos / SAGA</b><br/>Container · Node.js<br/>Orquestra compra, compensações<br/>e recuperação de pendências."]
+            pagamento["<b>Pagamento simulado</b><br/>Container · Node.js<br/>Processa cobrança e estorno<br/>com idempotência persistente."]
+            notificacoes["<b>Notificações</b><br/>Container · Node.js<br/>Registra confirmação da compra<br/>para consulta na aplicação."]
+        end
+
+        subgraph dados["Bancos exclusivos por serviço"]
+            direction LR
+            bdCatalogo[("<b>BD Catálogo</b><br/>Container · PostgreSQL<br/>Eventos, sessões e metadados.")]
+            bdReservas[("<b>BD Reservas</b><br/>Container · PostgreSQL<br/>Assentos, reservas, expires_at,<br/>versões, Inbox e Outbox.")]
+            bdPedidos[("<b>BD Pedidos</b><br/>Container · PostgreSQL<br/>Pedidos, estado da SAGA,<br/>idempotência, Inbox e Outbox.")]
+            bdPagamento[("<b>BD Pagamento</b><br/>Container · PostgreSQL<br/>Cobranças, estornos,<br/>idempotência, Inbox e Outbox.")]
+            bdNotificacoes[("<b>BD Notificações</b><br/>Container · PostgreSQL<br/>Confirmações, Inbox, Outbox<br/>e estado de entrega.")]
+        end
+
+        bus[("<b>Barramento de mensagens</b><br/>Container · Kafka<br/>Comandos e eventos da SAGA. Tópicos duráveis,<br/>retry com limite e backoff, DLT.<br/>Serviços publicam pela Outbox e processam<br/>mensagens de forma idempotente.")]
+
+        nota["Bancos exclusivos por serviço. Escritas de reserva passam pela SAGA; a consulta de assentos é informativa.<br/>Outbox, Inbox, expiração e recuperação são responsabilidades internas dos serviços; observabilidade na vista complementar."]
+    end
+
+    cliente -->|"Usa a interface · HTTPS"| web
+
+    gateway -->|"Consulta eventos<br/>HTTP/JSON"| catalogo
+    gateway -->|"Consulta assentos<br/>HTTP/JSON"| reserva
+    gateway -->|"Checkout / status<br/>HTTP/JSON"| pedidos
+    gateway -->|"Consulta confirmação<br/>HTTP/JSON"| notificacoes
+    catalogo -->|"Cache-Aside<br/>Redis RESP"| redis
+
+    catalogo -->|"SQL"| bdCatalogo
+    reserva -->|"SQL"| bdReservas
+    pedidos -->|"SQL"| bdPedidos
+    pagamento -->|"SQL"| bdPagamento
+    notificacoes -->|"SQL"| bdNotificacoes
+
+    reserva <-->|"Reserva / expiração<br/>Kafka"| bus
+    pedidos <-->|"Orquestra a SAGA<br/>Kafka"| bus
+    pagamento <-->|"Cobrança / estorno<br/>Kafka"| bus
+    notificacoes <-->|"Confirmações<br/>Kafka"| bus
+
+    bus ~~~ nota
+
+    classDef pessoa fill:#0B3A5B,stroke:#0B3A5B,color:#ffffff
+    classDef app fill:#438DD5,stroke:#2E6298,color:#ffffff
+    classDef dados fill:#E7F6EE,stroke:#2E7D4F,color:#143024
+    classDef fila fill:#FBF3E4,stroke:#C47B2B,color:#5C3B12
+    classDef aviso fill:#F7F7F5,stroke:#C8C8C8,color:#333333
+    class cliente pessoa
+    class web,gateway,admissao,catalogo,reserva,pedidos,pagamento,notificacoes app
+    class redis,bdCatalogo,bdReservas,bdPedidos,bdPagamento,bdNotificacoes dados
+    class bus fila
+    class nota aviso
+
+    style sistema fill:#F4F8FC,stroke:#8FB4D6,stroke-width:1px
+    style entrada fill:#ffffff,stroke:#D5E3F0
+    style aplicacao fill:#ffffff,stroke:#D5E3F0
+    style dados fill:#ffffff,stroke:#D5E3F0

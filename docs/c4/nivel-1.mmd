@@ -1,0 +1,16 @@
+%% eTIQUETE | C4 Nível 1 — Pessoas e escopo da plataforma
+%% Uma caixa de sistema, cercada só por pessoas. Cada seta leva rótulo.
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "16px", "fontFamily": "Segoe UI, Arial, sans-serif"}, "flowchart": {"htmlLabels": true, "curve": "basis", "nodeSpacing": 70, "rankSpacing": 80, "padding": 16}}}%%
+
+flowchart LR
+    cliente["<b>Cliente</b><br/>Pessoa<br/>Pessoa interessada em comprar ingressos para eventos."]
+    etiquete["<b>eTIQUETE</b><br/>Sistema de software<br/>Venda de ingressos com reserva temporária de assentos e fila de espera.<br/>Permite pagar de forma simulada e acompanhar a confirmação."]
+    equipe["<b>Equipe técnica</b><br/>Pessoa<br/>Acompanha disponibilidade, desempenho e falhas."]
+
+    cliente -->|"Consulta, reserva e paga.<br/>Acompanha a compra"| etiquete
+    equipe -->|"Monitora a operação"| etiquete
+
+    classDef pessoa fill:#0B3A5B,stroke:#0B3A5B,color:#ffffff
+    classDef sistema fill:#E8F1FA,stroke:#1168BD,color:#0B3A5B,stroke-width:2px
+    class cliente,equipe pessoa
+    class etiquete sistema
