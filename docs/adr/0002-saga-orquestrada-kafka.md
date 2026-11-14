@@ -10,7 +10,7 @@ A compra passa por reserva, pagamento e confirmação. Falha no pagamento ou res
 
 Transação distribuída entre os bancos. A compra atravessa os bancos exclusivos de cada serviço. Um commit distribuído prende a disponibilidade de todos à falha de um, e não desfaz reserva expirada nem cobrança já feita.
 
-RabbitMQ, broker registrado no PDF da entrega 2. O repositório já fixou um broker só, o Kafka, no README e no Compose. Manter RabbitMQ deixaria o texto e a execução em desacordo.
+RabbitMQ. O README e o Compose já fixaram um broker só, o Kafka. Manter RabbitMQ deixaria o texto e a execução em desacordo.
 
 ## Decisão
 

@@ -10,7 +10,7 @@ A plataforma permite consultar eventos, selecionar e reservar assentos temporari
 
 Em caso de falha no pagamento ou expiração da reserva, o sistema executa ações compensatórias para liberar os assentos e, quando necessário, estornar pagamentos.
 
-**Serviços e componentes:** Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos (orquestrador da SAGA), Pagamento Simulado, Notificações, Redis e Barramento de Mensagens.
+**Serviços e componentes:** Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos (orquestrador da SAGA), Pagamento Simulado, Notificações e barramento Kafka.
 
 ## Objetivos
 
@@ -24,15 +24,26 @@ Em caso de falha no pagamento ou expiração da reserva, o sistema executa açõ
 
 ## Tecnologias
 
+### Em uso
+
+Estão no repositório e sobem no Compose ou no workflow.
+
 | Tecnologia | Descrição |
 |---|---|
 | Node.js + React | Desenvolvimento dos microsserviços e da interface web. |
 | PostgreSQL | Banco de dados relacional, com persistência exclusiva por serviço. |
-| Redis | Cache do catálogo e gerenciamento de tokens temporários da fila de espera. |
 | Kafka | Barramento de mensagens para comunicação assíncrona entre os serviços da SAGA. |
 | Docker Compose | Execução e integração dos serviços e suas dependências em contêineres. |
 | GitHub Actions | Automação de verificações, testes e builds. |
-| Testcontainers | Execução de testes de integração com dependências reais em contêineres. |
+
+### Planejado
+
+Não há serviço, teste ou dashboard correspondente no repositório. O Compose não sobe estes itens.
+
+| Tecnologia | Descrição |
+|---|---|
+| Redis | Cache do catálogo e tokens temporários da fila de espera. |
+| Testcontainers | Testes de integração com dependências reais em contêineres. |
 | Prometheus | Coleta e armazenamento de métricas dos serviços. |
 | Grafana | Dashboards e visualização de métricas para monitoramento. |
 
@@ -78,7 +89,7 @@ Fonte: [`docs/c4/nivel-1.mmd`](docs/c4/nivel-1.mmd)
 
 ### Nível 2 — Vista principal da compra e coordenação distribuída
 
-Contêineres da compra: Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos / SAGA, Pagamento simulado e Notificações. Redis guarda a fila e o cache. Cada serviço tem o próprio PostgreSQL. O barramento Kafka leva reserva, orquestração da SAGA, cobrança e confirmação.
+O desenho inclui os contêineres da compra: Aplicação Web, API Gateway, Admissão, Catálogo de Eventos, Reserva de Assentos, Pedidos / SAGA, Pagamento simulado e Notificações, cada um com o próprio PostgreSQL. O barramento Kafka leva reserva, orquestração da SAGA, cobrança e confirmação. O Redis, que guarda a fila e o cache, é arquitetura planejada.
 
 ![C4 nível 2: compra e coordenação distribuída](docs/c4/nivel-2-compra.png)
 
@@ -86,7 +97,7 @@ Fonte: [`docs/c4/nivel-2-compra.mmd`](docs/c4/nivel-2-compra.mmd)
 
 ### Nível 2 — Vista complementar dos mesmos contêineres de aplicação
 
-A Equipe técnica consulta o Grafana. O Prometheus coleta `GET /metrics` do gateway, da admissão, do catálogo, da reserva, dos pedidos, do pagamento simulado e das notificações.
+A vista complementar mostra a observabilidade planejada: a Equipe técnica consulta o Grafana, e o Prometheus coleta `GET /metrics` do gateway, da admissão, do catálogo, da reserva, dos pedidos, do pagamento simulado e das notificações.
 
 ![C4 nível 2: observabilidade dos mesmos contêineres](docs/c4/nivel-2-complementar.png)
 
