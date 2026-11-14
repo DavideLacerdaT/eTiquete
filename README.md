@@ -120,6 +120,10 @@ As decisões aceitas, com a alternativa descartada e o motivo, estão em:
 - [ADR 0001 — Banco exclusivo por serviço](docs/adr/0001-banco-exclusivo-por-servico.md)
 - [ADR 0002 — SAGA orquestrada com Kafka](docs/adr/0002-saga-orquestrada-kafka.md)
 
+## Equipe
+
+Herick José de Freitas (interface e gateway), Davi de Lacerda Teixeira (catálogo, cache e admissão), João Victor Fernandes da Silveira (reservas), Rafael de França Silva (pedidos e SAGA) e Enilson Lima da Costa Júnior (pagamento e notificações). A parte de cada um e a entrega prática estão em [docs/equipe.md](docs/equipe.md).
+
 ## Status
 
 Em desenvolvimento.
