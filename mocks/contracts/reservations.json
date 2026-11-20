@@ -1,0 +1,2435 @@
+{
+  "contractVersion": 1,
+  "service": "reservations",
+  "responsibility": "Inventário, aquisição atômica, confirmação, liberação e expiração.",
+  "fixtures": {
+    "seats": [
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000001",
+        "section": "Plateia",
+        "row": "A",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000002",
+        "section": "Plateia",
+        "row": "A",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000003",
+        "section": "Plateia",
+        "row": "A",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000004",
+        "section": "Plateia",
+        "row": "A",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000005",
+        "section": "Plateia",
+        "row": "A",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000006",
+        "section": "Plateia",
+        "row": "A",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000007",
+        "section": "Plateia",
+        "row": "A",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000008",
+        "section": "Plateia",
+        "row": "A",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000009",
+        "section": "Plateia",
+        "row": "B",
+        "number": "01",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000010",
+        "section": "Plateia",
+        "row": "B",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000011",
+        "section": "Plateia",
+        "row": "B",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000012",
+        "section": "Plateia",
+        "row": "B",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000013",
+        "section": "Plateia",
+        "row": "B",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000014",
+        "section": "Plateia",
+        "row": "B",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000015",
+        "section": "Plateia",
+        "row": "B",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000016",
+        "section": "Plateia",
+        "row": "B",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000017",
+        "section": "Plateia",
+        "row": "C",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000018",
+        "section": "Plateia",
+        "row": "C",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000019",
+        "section": "Plateia",
+        "row": "C",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000020",
+        "section": "Plateia",
+        "row": "C",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000021",
+        "section": "Plateia",
+        "row": "C",
+        "number": "05",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000022",
+        "section": "Plateia",
+        "row": "C",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000023",
+        "section": "Plateia",
+        "row": "C",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000024",
+        "section": "Plateia",
+        "row": "C",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000025",
+        "section": "Plateia",
+        "row": "D",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000026",
+        "section": "Plateia",
+        "row": "D",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000027",
+        "section": "Plateia",
+        "row": "D",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000028",
+        "section": "Plateia",
+        "row": "D",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000029",
+        "section": "Plateia",
+        "row": "D",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000030",
+        "section": "Plateia",
+        "row": "D",
+        "number": "06",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000031",
+        "section": "Plateia",
+        "row": "D",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000032",
+        "section": "Plateia",
+        "row": "D",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000033",
+        "section": "Plateia",
+        "row": "E",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000034",
+        "section": "Plateia",
+        "row": "E",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000035",
+        "section": "Plateia",
+        "row": "E",
+        "number": "03",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000036",
+        "section": "Plateia",
+        "row": "E",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000037",
+        "section": "Plateia",
+        "row": "E",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000038",
+        "section": "Plateia",
+        "row": "E",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000039",
+        "section": "Plateia",
+        "row": "E",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000040",
+        "section": "Plateia",
+        "row": "E",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000041",
+        "section": "Plateia",
+        "row": "F",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000042",
+        "section": "Plateia",
+        "row": "F",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000043",
+        "section": "Plateia",
+        "row": "F",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000044",
+        "section": "Plateia",
+        "row": "F",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000045",
+        "section": "Plateia",
+        "row": "F",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000046",
+        "section": "Plateia",
+        "row": "F",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000047",
+        "section": "Plateia",
+        "row": "F",
+        "number": "07",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "seatId": "00000004-0000-4000-8000-000000000048",
+        "section": "Plateia",
+        "row": "F",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000101",
+        "section": "Plateia",
+        "row": "A",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000102",
+        "section": "Plateia",
+        "row": "A",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000103",
+        "section": "Plateia",
+        "row": "A",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000104",
+        "section": "Plateia",
+        "row": "A",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000105",
+        "section": "Plateia",
+        "row": "A",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000106",
+        "section": "Plateia",
+        "row": "A",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000107",
+        "section": "Plateia",
+        "row": "A",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000108",
+        "section": "Plateia",
+        "row": "A",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000109",
+        "section": "Plateia",
+        "row": "B",
+        "number": "01",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000110",
+        "section": "Plateia",
+        "row": "B",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000111",
+        "section": "Plateia",
+        "row": "B",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000112",
+        "section": "Plateia",
+        "row": "B",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000113",
+        "section": "Plateia",
+        "row": "B",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000114",
+        "section": "Plateia",
+        "row": "B",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000115",
+        "section": "Plateia",
+        "row": "B",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000116",
+        "section": "Plateia",
+        "row": "B",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000117",
+        "section": "Plateia",
+        "row": "C",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000118",
+        "section": "Plateia",
+        "row": "C",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000119",
+        "section": "Plateia",
+        "row": "C",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000120",
+        "section": "Plateia",
+        "row": "C",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000121",
+        "section": "Plateia",
+        "row": "C",
+        "number": "05",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000122",
+        "section": "Plateia",
+        "row": "C",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000123",
+        "section": "Plateia",
+        "row": "C",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000124",
+        "section": "Plateia",
+        "row": "C",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000125",
+        "section": "Plateia",
+        "row": "D",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000126",
+        "section": "Plateia",
+        "row": "D",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000127",
+        "section": "Plateia",
+        "row": "D",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000128",
+        "section": "Plateia",
+        "row": "D",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000129",
+        "section": "Plateia",
+        "row": "D",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000130",
+        "section": "Plateia",
+        "row": "D",
+        "number": "06",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000131",
+        "section": "Plateia",
+        "row": "D",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000132",
+        "section": "Plateia",
+        "row": "D",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000133",
+        "section": "Plateia",
+        "row": "E",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000134",
+        "section": "Plateia",
+        "row": "E",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000135",
+        "section": "Plateia",
+        "row": "E",
+        "number": "03",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000136",
+        "section": "Plateia",
+        "row": "E",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000137",
+        "section": "Plateia",
+        "row": "E",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000138",
+        "section": "Plateia",
+        "row": "E",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000139",
+        "section": "Plateia",
+        "row": "E",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000140",
+        "section": "Plateia",
+        "row": "E",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000141",
+        "section": "Plateia",
+        "row": "F",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000142",
+        "section": "Plateia",
+        "row": "F",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000143",
+        "section": "Plateia",
+        "row": "F",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000144",
+        "section": "Plateia",
+        "row": "F",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000145",
+        "section": "Plateia",
+        "row": "F",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000146",
+        "section": "Plateia",
+        "row": "F",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000147",
+        "section": "Plateia",
+        "row": "F",
+        "number": "07",
+        "status": "SOLD",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "seatId": "00000004-0000-4000-8000-000000000148",
+        "section": "Plateia",
+        "row": "F",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000201",
+        "section": "Plateia",
+        "row": "A",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000202",
+        "section": "Plateia",
+        "row": "A",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000203",
+        "section": "Plateia",
+        "row": "A",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000204",
+        "section": "Plateia",
+        "row": "A",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000205",
+        "section": "Plateia",
+        "row": "A",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000206",
+        "section": "Plateia",
+        "row": "A",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000207",
+        "section": "Plateia",
+        "row": "A",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000208",
+        "section": "Plateia",
+        "row": "A",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000209",
+        "section": "Plateia",
+        "row": "B",
+        "number": "01",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000210",
+        "section": "Plateia",
+        "row": "B",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000211",
+        "section": "Plateia",
+        "row": "B",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000212",
+        "section": "Plateia",
+        "row": "B",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000213",
+        "section": "Plateia",
+        "row": "B",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000214",
+        "section": "Plateia",
+        "row": "B",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000215",
+        "section": "Plateia",
+        "row": "B",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000216",
+        "section": "Plateia",
+        "row": "B",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000217",
+        "section": "Plateia",
+        "row": "C",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000218",
+        "section": "Plateia",
+        "row": "C",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000219",
+        "section": "Plateia",
+        "row": "C",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000220",
+        "section": "Plateia",
+        "row": "C",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000221",
+        "section": "Plateia",
+        "row": "C",
+        "number": "05",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000222",
+        "section": "Plateia",
+        "row": "C",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000223",
+        "section": "Plateia",
+        "row": "C",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000224",
+        "section": "Plateia",
+        "row": "C",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000225",
+        "section": "Plateia",
+        "row": "D",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000226",
+        "section": "Plateia",
+        "row": "D",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000227",
+        "section": "Plateia",
+        "row": "D",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000228",
+        "section": "Plateia",
+        "row": "D",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000229",
+        "section": "Plateia",
+        "row": "D",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000230",
+        "section": "Plateia",
+        "row": "D",
+        "number": "06",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000231",
+        "section": "Plateia",
+        "row": "D",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000232",
+        "section": "Plateia",
+        "row": "D",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000233",
+        "section": "Plateia",
+        "row": "E",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000234",
+        "section": "Plateia",
+        "row": "E",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000235",
+        "section": "Plateia",
+        "row": "E",
+        "number": "03",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000236",
+        "section": "Plateia",
+        "row": "E",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000237",
+        "section": "Plateia",
+        "row": "E",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000238",
+        "section": "Plateia",
+        "row": "E",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000239",
+        "section": "Plateia",
+        "row": "E",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000240",
+        "section": "Plateia",
+        "row": "E",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000241",
+        "section": "Plateia",
+        "row": "F",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000242",
+        "section": "Plateia",
+        "row": "F",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000243",
+        "section": "Plateia",
+        "row": "F",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000244",
+        "section": "Plateia",
+        "row": "F",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000245",
+        "section": "Plateia",
+        "row": "F",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000246",
+        "section": "Plateia",
+        "row": "F",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000247",
+        "section": "Plateia",
+        "row": "F",
+        "number": "07",
+        "status": "SOLD",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "seatId": "00000004-0000-4000-8000-000000000248",
+        "section": "Plateia",
+        "row": "F",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000301",
+        "section": "Plateia",
+        "row": "A",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000302",
+        "section": "Plateia",
+        "row": "A",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000303",
+        "section": "Plateia",
+        "row": "A",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000304",
+        "section": "Plateia",
+        "row": "A",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000305",
+        "section": "Plateia",
+        "row": "A",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000306",
+        "section": "Plateia",
+        "row": "A",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000307",
+        "section": "Plateia",
+        "row": "A",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000308",
+        "section": "Plateia",
+        "row": "A",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000309",
+        "section": "Plateia",
+        "row": "B",
+        "number": "01",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000310",
+        "section": "Plateia",
+        "row": "B",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000311",
+        "section": "Plateia",
+        "row": "B",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000312",
+        "section": "Plateia",
+        "row": "B",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000313",
+        "section": "Plateia",
+        "row": "B",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000314",
+        "section": "Plateia",
+        "row": "B",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000315",
+        "section": "Plateia",
+        "row": "B",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000316",
+        "section": "Plateia",
+        "row": "B",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000317",
+        "section": "Plateia",
+        "row": "C",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000318",
+        "section": "Plateia",
+        "row": "C",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000319",
+        "section": "Plateia",
+        "row": "C",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000320",
+        "section": "Plateia",
+        "row": "C",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000321",
+        "section": "Plateia",
+        "row": "C",
+        "number": "05",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000322",
+        "section": "Plateia",
+        "row": "C",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000323",
+        "section": "Plateia",
+        "row": "C",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000324",
+        "section": "Plateia",
+        "row": "C",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000325",
+        "section": "Plateia",
+        "row": "D",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000326",
+        "section": "Plateia",
+        "row": "D",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000327",
+        "section": "Plateia",
+        "row": "D",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000328",
+        "section": "Plateia",
+        "row": "D",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000329",
+        "section": "Plateia",
+        "row": "D",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000330",
+        "section": "Plateia",
+        "row": "D",
+        "number": "06",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000331",
+        "section": "Plateia",
+        "row": "D",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000332",
+        "section": "Plateia",
+        "row": "D",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000333",
+        "section": "Plateia",
+        "row": "E",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000334",
+        "section": "Plateia",
+        "row": "E",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000335",
+        "section": "Plateia",
+        "row": "E",
+        "number": "03",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000336",
+        "section": "Plateia",
+        "row": "E",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000337",
+        "section": "Plateia",
+        "row": "E",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000338",
+        "section": "Plateia",
+        "row": "E",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000339",
+        "section": "Plateia",
+        "row": "E",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000340",
+        "section": "Plateia",
+        "row": "E",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000341",
+        "section": "Plateia",
+        "row": "F",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000342",
+        "section": "Plateia",
+        "row": "F",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000343",
+        "section": "Plateia",
+        "row": "F",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000344",
+        "section": "Plateia",
+        "row": "F",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000345",
+        "section": "Plateia",
+        "row": "F",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000346",
+        "section": "Plateia",
+        "row": "F",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000347",
+        "section": "Plateia",
+        "row": "F",
+        "number": "07",
+        "status": "SOLD",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "seatId": "00000004-0000-4000-8000-000000000348",
+        "section": "Plateia",
+        "row": "F",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000401",
+        "section": "Plateia",
+        "row": "A",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000402",
+        "section": "Plateia",
+        "row": "A",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000403",
+        "section": "Plateia",
+        "row": "A",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000404",
+        "section": "Plateia",
+        "row": "A",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000405",
+        "section": "Plateia",
+        "row": "A",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000406",
+        "section": "Plateia",
+        "row": "A",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000407",
+        "section": "Plateia",
+        "row": "A",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000408",
+        "section": "Plateia",
+        "row": "A",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000409",
+        "section": "Plateia",
+        "row": "B",
+        "number": "01",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000410",
+        "section": "Plateia",
+        "row": "B",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000411",
+        "section": "Plateia",
+        "row": "B",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000412",
+        "section": "Plateia",
+        "row": "B",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000413",
+        "section": "Plateia",
+        "row": "B",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000414",
+        "section": "Plateia",
+        "row": "B",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000415",
+        "section": "Plateia",
+        "row": "B",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000416",
+        "section": "Plateia",
+        "row": "B",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000417",
+        "section": "Plateia",
+        "row": "C",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000418",
+        "section": "Plateia",
+        "row": "C",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000419",
+        "section": "Plateia",
+        "row": "C",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000420",
+        "section": "Plateia",
+        "row": "C",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000421",
+        "section": "Plateia",
+        "row": "C",
+        "number": "05",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000422",
+        "section": "Plateia",
+        "row": "C",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000423",
+        "section": "Plateia",
+        "row": "C",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000424",
+        "section": "Plateia",
+        "row": "C",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000425",
+        "section": "Plateia",
+        "row": "D",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000426",
+        "section": "Plateia",
+        "row": "D",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000427",
+        "section": "Plateia",
+        "row": "D",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000428",
+        "section": "Plateia",
+        "row": "D",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000429",
+        "section": "Plateia",
+        "row": "D",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000430",
+        "section": "Plateia",
+        "row": "D",
+        "number": "06",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000431",
+        "section": "Plateia",
+        "row": "D",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000432",
+        "section": "Plateia",
+        "row": "D",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000433",
+        "section": "Plateia",
+        "row": "E",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000434",
+        "section": "Plateia",
+        "row": "E",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000435",
+        "section": "Plateia",
+        "row": "E",
+        "number": "03",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000436",
+        "section": "Plateia",
+        "row": "E",
+        "number": "04",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000437",
+        "section": "Plateia",
+        "row": "E",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000438",
+        "section": "Plateia",
+        "row": "E",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000439",
+        "section": "Plateia",
+        "row": "E",
+        "number": "07",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000440",
+        "section": "Plateia",
+        "row": "E",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000441",
+        "section": "Plateia",
+        "row": "F",
+        "number": "01",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000442",
+        "section": "Plateia",
+        "row": "F",
+        "number": "02",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000443",
+        "section": "Plateia",
+        "row": "F",
+        "number": "03",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000444",
+        "section": "Plateia",
+        "row": "F",
+        "number": "04",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000445",
+        "section": "Plateia",
+        "row": "F",
+        "number": "05",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000446",
+        "section": "Plateia",
+        "row": "F",
+        "number": "06",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000447",
+        "section": "Plateia",
+        "row": "F",
+        "number": "07",
+        "status": "SOLD",
+        "priceCents": 6000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "seatId": "00000004-0000-4000-8000-000000000448",
+        "section": "Plateia",
+        "row": "F",
+        "number": "08",
+        "status": "AVAILABLE",
+        "priceCents": 6000
+      }
+    ],
+    "reservations": [
+      {
+        "reservationId": "00000005-0000-4000-8000-000000000001",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000003",
+            "seatIds": ["00000004-0000-4000-8000-000000000204"]
+          }
+        ],
+        "status": "CONFIRMED",
+        "expiresAt": "2026-11-18T18:10:00Z",
+        "confirmedAt": "2026-11-18T18:01:00Z",
+        "amountCents": 8000,
+        "orderId": "00000006-0000-4000-8000-000000000001"
+      },
+      {
+        "reservationId": "00000005-0000-4000-8000-000000000002",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000001",
+            "seatIds": ["00000004-0000-4000-8000-000000000002"]
+          }
+        ],
+        "status": "EXPIRED",
+        "expiresAt": "2026-11-18T17:10:00Z",
+        "amountCents": 12000
+      },
+      {
+        "reservationId": "00000005-0000-4000-8000-000000000003",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000004",
+            "seatIds": ["00000004-0000-4000-8000-000000000302"]
+          }
+        ],
+        "status": "RELEASED",
+        "expiresAt": "2026-11-17T17:10:00Z",
+        "amountCents": 16000
+      },
+      {
+        "reservationId": "00000005-0000-4000-8000-000000000004",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000001",
+            "seatIds": ["00000004-0000-4000-8000-000000000001"]
+          }
+        ],
+        "status": "HELD",
+        "expiresAt": "2026-11-19T15:10:00Z",
+        "amountCents": 12000
+      }
+    ]
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/reservations",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "expiresInSeconds": 600
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "status": "HELD",
+          "expiresAt": "2026-11-19T15:10:00Z",
+          "amountCents": 12000
+        }
+      },
+      "errors": [
+        {
+          "status": 400,
+          "body": {
+            "error": {
+              "code": "VALIDATION_ERROR",
+              "message": "Revise os campos informados.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        },
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "IDEMPOTENCY_KEY_REUSED",
+              "message": "Esta chave já foi usada com outro conteúdo.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        },
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "SEAT_UNAVAILABLE",
+              "message": "Um ou mais assentos não estão disponíveis.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/reservations/00000005-0000-4000-8000-000000000004",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "status": "HELD",
+          "expiresAt": "2026-11-19T15:10:00Z",
+          "amountCents": 12000
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/reservations/00000005-0000-4000-8000-000000000004/confirm",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000003"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "status": "CONFIRMED",
+          "expiresAt": "2026-11-19T15:10:00Z",
+          "amountCents": 12000,
+          "confirmedAt": "2026-11-19T15:01:00Z"
+        }
+      },
+      "errors": [
+        {
+          "status": 410,
+          "body": {
+            "error": {
+              "code": "RESERVATION_EXPIRED",
+              "message": "O prazo da reserva terminou.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/reservations/00000005-0000-4000-8000-000000000004/release",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "reason": "PAYMENT_DECLINED"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "status": "RELEASED",
+          "expiresAt": "2026-11-19T15:10:00Z",
+          "amountCents": 12000
+        }
+      },
+      "errors": [
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "INVALID_STATE_TRANSITION",
+              "message": "Reserva já confirmada.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

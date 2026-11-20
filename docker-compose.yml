@@ -1,20 +1,135 @@
+x-development-service: &development-service
+  build:
+    context: .
+    dockerfile: services/Dockerfile
+  restart: unless-stopped
+  networks: [etiquete]
+
+x-dependencies: &dependencies
+  DATA_MODE: ${DATA_MODE:-mock}
+  MOCK_SCENARIO: ${MOCK_SCENARIO:-happy-path}
+  DEPENDENCY_TIMEOUT_MS: ${DEPENDENCY_TIMEOUT_MS:-10000}
+  MESSAGING_MODE: ${MESSAGING_MODE:-mock}
+  KAFKA_BROKERS: kafka:9092
+  CATALOG_MODE: ${CATALOG_MODE:-${DATA_MODE:-mock}}
+  CATALOG_URL: http://catalog:3011
+  ADMISSIONS_MODE: ${ADMISSIONS_MODE:-${DATA_MODE:-mock}}
+  ADMISSIONS_URL: http://admissions:3012
+  RESERVATIONS_MODE: ${RESERVATIONS_MODE:-${DATA_MODE:-mock}}
+  RESERVATIONS_URL: http://reservations:3013
+  ORDERS_MODE: ${ORDERS_MODE:-${DATA_MODE:-mock}}
+  ORDERS_URL: http://orders:3014
+  PAYMENTS_MODE: ${PAYMENTS_MODE:-${DATA_MODE:-mock}}
+  PAYMENTS_URL: http://payments:3015
+  NOTIFICATIONS_MODE: ${NOTIFICATIONS_MODE:-${DATA_MODE:-mock}}
+  NOTIFICATIONS_URL: http://notifications:3016
+
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
     restart: unless-stopped
     expose:
-      - "80"
+      - '80'
     networks:
       - etiquete
+
+  gateway:
+    <<: *development-service
+    command: ['node', 'services/gateway/server.mjs']
+    environment:
+      <<: *dependencies
+      PORT: 3001
+      MOCK_BASE_URL: http://mock-hub:3090
+    depends_on: [mock-hub]
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3001/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  mock-hub:
+    <<: *development-service
+    command: ['node', 'scripts/mock-hub.mjs']
+    environment:
+      <<: *dependencies
+      PORT: 3090
+
+  catalog:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: catalog
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3011:3011']
+
+  admissions:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: admissions
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3012:3012']
+
+  reservations:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: reservations
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3013:3013']
+
+  orders:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: orders
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3014:3014']
+
+  payments:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: payments
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3015:3015']
+
+  notifications:
+    <<: *development-service
+    profiles: [microservices]
+    environment:
+      <<: *dependencies
+      SERVICE_NAME: notifications
+      MOCK_BASE_URL: http://mock-hub:3090
+    ports: ['127.0.0.1:3016:3016']
 
   backend:
     build:
       context: ./backend
     restart: unless-stopped
     expose:
-      - "3000"
+      - '3000'
     healthcheck:
-      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3000/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -30,12 +145,12 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-etiquete}
       POSTGRES_DB: ${POSTGRES_DB:-etiquete}
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - '${POSTGRES_PORT:-5432}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-etiquete} -d ${POSTGRES_DB:-etiquete}"]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-etiquete} -d ${POSTGRES_DB:-etiquete}']
       interval: 5s
       timeout: 5s
       retries: 10
@@ -46,7 +161,7 @@ services:
     image: apache/kafka:4.4.0
     container_name: etiquete-kafka
     hostname: kafka
-    user: "0:0"
+    user: '0:0'
     restart: unless-stopped
     entrypoint:
       - /__cacert_entrypoint.sh
@@ -54,7 +169,7 @@ services:
       - -c
       - mkdir -p /tmp/kraft-combined-logs && chown -R appuser:appuser /tmp/kraft-combined-logs && exec su -s /bin/bash appuser -c "exec /etc/kafka/docker/run"
     ports:
-      - "${KAFKA_PORT:-9092}:9094"
+      - '${KAFKA_PORT:-9092}:9094'
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
@@ -75,7 +190,8 @@ services:
     volumes:
       - kafka_data:/tmp/kraft-combined-logs
     healthcheck:
-      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-cluster.sh api-versions --bootstrap-server kafka:9092"]
+      test:
+        ['CMD-SHELL', '/opt/kafka/bin/kafka-cluster.sh api-versions --bootstrap-server kafka:9092']
       interval: 10s
       timeout: 10s
       retries: 10
@@ -87,12 +203,13 @@ services:
     image: nginx:1.27-alpine
     container_name: etiquete-nginx
     restart: unless-stopped
+    depends_on: [frontend, backend, gateway]
     ports:
-      - "${NGINX_PORT:-8080}:80"
+      - '${NGINX_PORT:-8080}:80'
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     healthcheck:
-      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/health"]
+      test: ['CMD', 'wget', '-q', '-O', '/dev/null', 'http://127.0.0.1/health']
       interval: 10s
       timeout: 3s
       retries: 5

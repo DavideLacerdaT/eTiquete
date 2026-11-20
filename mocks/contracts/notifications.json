@@ -1,0 +1,142 @@
+{
+  "contractVersion": 1,
+  "service": "notifications",
+  "responsibility": "Confirmações persistidas antes de tentativa de entrega. Criação somente por mensagem.",
+  "fixtures": {
+    "notifications": [
+      {
+        "notificationId": "00000008-0000-4000-8000-000000000001",
+        "orderId": "00000006-0000-4000-8000-000000000001",
+        "username": "marina",
+        "template": "ORDER_CONFIRMED",
+        "title": "Seu lugar está garantido!",
+        "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+        "status": "SENT",
+        "createdAt": "2026-11-18T18:01:00Z",
+        "sentAt": "2026-11-18T18:01:02Z"
+      },
+      {
+        "notificationId": "00000008-0000-4000-8000-000000000002",
+        "orderId": "00000006-0000-4000-8000-000000000002",
+        "username": "marina",
+        "template": "ORDER_CANCELLED",
+        "title": "Compra cancelada",
+        "message": "O pagamento de Festival Solar foi recusado. Os assentos foram liberados para uma nova tentativa.",
+        "status": "SENT",
+        "createdAt": "2026-11-17T17:01:00Z",
+        "sentAt": "2026-11-17T17:01:02Z"
+      }
+    ],
+    "failed": {
+      "notificationId": "00000008-0000-4000-8000-000000000003",
+      "orderId": "00000006-0000-4000-8000-000000000001",
+      "username": "marina",
+      "template": "ORDER_CONFIRMED",
+      "title": "Seu lugar está garantido!",
+      "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+      "status": "FAILED",
+      "createdAt": "2026-11-18T18:01:00Z",
+      "sentAt": null,
+      "failureCode": "DELIVERY_FAILED"
+    }
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/notifications",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "items": [
+            {
+              "notificationId": "00000008-0000-4000-8000-000000000001",
+              "orderId": "00000006-0000-4000-8000-000000000001",
+              "username": "marina",
+              "template": "ORDER_CONFIRMED",
+              "title": "Seu lugar está garantido!",
+              "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+              "status": "SENT",
+              "createdAt": "2026-11-18T18:01:00Z",
+              "sentAt": "2026-11-18T18:01:02Z"
+            },
+            {
+              "notificationId": "00000008-0000-4000-8000-000000000002",
+              "orderId": "00000006-0000-4000-8000-000000000002",
+              "username": "marina",
+              "template": "ORDER_CANCELLED",
+              "title": "Compra cancelada",
+              "message": "O pagamento de Festival Solar foi recusado. Os assentos foram liberados para uma nova tentativa.",
+              "status": "SENT",
+              "createdAt": "2026-11-17T17:01:00Z",
+              "sentAt": "2026-11-17T17:01:02Z"
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "limit": 20,
+            "totalItems": 2,
+            "totalPages": 1
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/notifications/00000008-0000-4000-8000-000000000001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "notificationId": "00000008-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "username": "marina",
+          "template": "ORDER_CONFIRMED",
+          "title": "Seu lugar está garantido!",
+          "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+          "status": "SENT",
+          "createdAt": "2026-11-18T18:01:00Z",
+          "sentAt": "2026-11-18T18:01:02Z"
+        }
+      },
+      "errors": [
+        {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "RESOURCE_NOT_FOUND",
+              "message": "Recurso não encontrado.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

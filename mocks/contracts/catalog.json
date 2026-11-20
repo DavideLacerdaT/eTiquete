@@ -1,0 +1,936 @@
+{
+  "contractVersion": 1,
+  "service": "catalog",
+  "responsibility": "Eventos, sessões e locais.",
+  "fixtures": {
+    "events": [
+      {
+        "eventId": "00000001-0000-4000-8000-000000000001",
+        "title": "Noites de Jazz",
+        "category": "Música",
+        "subtitle": "Uma noite para sentir cada nota.",
+        "description": "Um encontro entre o jazz e os ritmos da Bahia. Quarteto ao vivo, convidados especiais e uma noite sob as estrelas.",
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "priceFromCents": 12000,
+        "color": "pink",
+        "artwork": "jazz",
+        "durationMinutes": 120,
+        "ageRating": "12 anos",
+        "venue": {
+          "venueId": "00000003-0000-4000-8000-000000000001",
+          "name": "Concha Acústica",
+          "city": "Salvador",
+          "address": "Praça Dois de Julho, Campo Grande"
+        },
+        "sessions": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000001",
+            "eventId": "00000001-0000-4000-8000-000000000001",
+            "venueId": "00000003-0000-4000-8000-000000000001",
+            "startsAt": "2026-11-20T22:00:00Z",
+            "priceCents": 12000
+          },
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000002",
+            "eventId": "00000001-0000-4000-8000-000000000001",
+            "venueId": "00000003-0000-4000-8000-000000000001",
+            "startsAt": "2026-11-21T22:00:00Z",
+            "priceCents": 12000
+          }
+        ]
+      },
+      {
+        "eventId": "00000001-0000-4000-8000-000000000002",
+        "title": "Entre Atos",
+        "category": "Teatro",
+        "subtitle": "Toda história merece um palco.",
+        "description": "Três histórias se cruzam em uma montagem sobre encontros, recomeços e os pequenos acontecimentos da vida.",
+        "venueId": "00000003-0000-4000-8000-000000000002",
+        "priceFromCents": 8000,
+        "color": "blue",
+        "artwork": "theatre",
+        "durationMinutes": 90,
+        "ageRating": "Livre",
+        "venue": {
+          "venueId": "00000003-0000-4000-8000-000000000002",
+          "name": "Teatro Castro Alves",
+          "city": "Salvador",
+          "address": "Praça Dois de Julho, s/n"
+        },
+        "sessions": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000003",
+            "eventId": "00000001-0000-4000-8000-000000000002",
+            "venueId": "00000003-0000-4000-8000-000000000002",
+            "startsAt": "2026-11-21T23:00:00Z",
+            "priceCents": 8000
+          }
+        ]
+      },
+      {
+        "eventId": "00000001-0000-4000-8000-000000000003",
+        "title": "Festival Solar",
+        "category": "Festival",
+        "subtitle": "Música boa. Energia lá em cima.",
+        "description": "Uma celebração da música brasileira com artistas independentes e novas vozes da cena baiana.",
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "priceFromCents": 16000,
+        "color": "yellow",
+        "artwork": "sun",
+        "durationMinutes": 240,
+        "ageRating": "16 anos",
+        "venue": {
+          "venueId": "00000003-0000-4000-8000-000000000001",
+          "name": "Concha Acústica",
+          "city": "Salvador",
+          "address": "Praça Dois de Julho, Campo Grande"
+        },
+        "sessions": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000004",
+            "eventId": "00000001-0000-4000-8000-000000000003",
+            "venueId": "00000003-0000-4000-8000-000000000001",
+            "startsAt": "2026-11-22T19:00:00Z",
+            "priceCents": 16000
+          }
+        ]
+      },
+      {
+        "eventId": "00000001-0000-4000-8000-000000000004",
+        "title": "Ideias em Movimento",
+        "category": "Conferência",
+        "subtitle": "O próximo encontro começa com uma ideia.",
+        "description": "Conversas e experiências sobre criatividade, tecnologia e futuros possíveis, com profissionais de diferentes áreas.",
+        "venueId": "00000003-0000-4000-8000-000000000003",
+        "priceFromCents": 6000,
+        "color": "green",
+        "artwork": "ideas",
+        "durationMinutes": 180,
+        "ageRating": "Livre",
+        "venue": {
+          "venueId": "00000003-0000-4000-8000-000000000003",
+          "name": "Casa do Comércio",
+          "city": "Salvador",
+          "address": "Av. Tancredo Neves, 1109"
+        },
+        "sessions": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000005",
+            "eventId": "00000001-0000-4000-8000-000000000004",
+            "venueId": "00000003-0000-4000-8000-000000000003",
+            "startsAt": "2026-11-25T17:00:00Z",
+            "priceCents": 6000
+          }
+        ]
+      }
+    ],
+    "sessions": [
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000001",
+        "eventId": "00000001-0000-4000-8000-000000000001",
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "startsAt": "2026-11-20T22:00:00Z",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000002",
+        "eventId": "00000001-0000-4000-8000-000000000001",
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "startsAt": "2026-11-21T22:00:00Z",
+        "priceCents": 12000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000003",
+        "eventId": "00000001-0000-4000-8000-000000000002",
+        "venueId": "00000003-0000-4000-8000-000000000002",
+        "startsAt": "2026-11-21T23:00:00Z",
+        "priceCents": 8000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000004",
+        "eventId": "00000001-0000-4000-8000-000000000003",
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "startsAt": "2026-11-22T19:00:00Z",
+        "priceCents": 16000
+      },
+      {
+        "sessionId": "00000002-0000-4000-8000-000000000005",
+        "eventId": "00000001-0000-4000-8000-000000000004",
+        "venueId": "00000003-0000-4000-8000-000000000003",
+        "startsAt": "2026-11-25T17:00:00Z",
+        "priceCents": 6000
+      }
+    ],
+    "venues": [
+      {
+        "venueId": "00000003-0000-4000-8000-000000000001",
+        "name": "Concha Acústica",
+        "city": "Salvador",
+        "address": "Praça Dois de Julho, Campo Grande"
+      },
+      {
+        "venueId": "00000003-0000-4000-8000-000000000002",
+        "name": "Teatro Castro Alves",
+        "city": "Salvador",
+        "address": "Praça Dois de Julho, s/n"
+      },
+      {
+        "venueId": "00000003-0000-4000-8000-000000000003",
+        "name": "Casa do Comércio",
+        "city": "Salvador",
+        "address": "Av. Tancredo Neves, 1109"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/events",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "items": [
+            {
+              "eventId": "00000001-0000-4000-8000-000000000001",
+              "title": "Noites de Jazz",
+              "category": "Música",
+              "subtitle": "Uma noite para sentir cada nota.",
+              "description": "Um encontro entre o jazz e os ritmos da Bahia. Quarteto ao vivo, convidados especiais e uma noite sob as estrelas.",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "priceFromCents": 12000,
+              "color": "pink",
+              "artwork": "jazz",
+              "durationMinutes": 120,
+              "ageRating": "12 anos",
+              "venue": {
+                "venueId": "00000003-0000-4000-8000-000000000001",
+                "name": "Concha Acústica",
+                "city": "Salvador",
+                "address": "Praça Dois de Julho, Campo Grande"
+              },
+              "sessions": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000001",
+                  "eventId": "00000001-0000-4000-8000-000000000001",
+                  "venueId": "00000003-0000-4000-8000-000000000001",
+                  "startsAt": "2026-11-20T22:00:00Z",
+                  "priceCents": 12000
+                },
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000002",
+                  "eventId": "00000001-0000-4000-8000-000000000001",
+                  "venueId": "00000003-0000-4000-8000-000000000001",
+                  "startsAt": "2026-11-21T22:00:00Z",
+                  "priceCents": 12000
+                }
+              ]
+            },
+            {
+              "eventId": "00000001-0000-4000-8000-000000000002",
+              "title": "Entre Atos",
+              "category": "Teatro",
+              "subtitle": "Toda história merece um palco.",
+              "description": "Três histórias se cruzam em uma montagem sobre encontros, recomeços e os pequenos acontecimentos da vida.",
+              "venueId": "00000003-0000-4000-8000-000000000002",
+              "priceFromCents": 8000,
+              "color": "blue",
+              "artwork": "theatre",
+              "durationMinutes": 90,
+              "ageRating": "Livre",
+              "venue": {
+                "venueId": "00000003-0000-4000-8000-000000000002",
+                "name": "Teatro Castro Alves",
+                "city": "Salvador",
+                "address": "Praça Dois de Julho, s/n"
+              },
+              "sessions": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000003",
+                  "eventId": "00000001-0000-4000-8000-000000000002",
+                  "venueId": "00000003-0000-4000-8000-000000000002",
+                  "startsAt": "2026-11-21T23:00:00Z",
+                  "priceCents": 8000
+                }
+              ]
+            },
+            {
+              "eventId": "00000001-0000-4000-8000-000000000003",
+              "title": "Festival Solar",
+              "category": "Festival",
+              "subtitle": "Música boa. Energia lá em cima.",
+              "description": "Uma celebração da música brasileira com artistas independentes e novas vozes da cena baiana.",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "priceFromCents": 16000,
+              "color": "yellow",
+              "artwork": "sun",
+              "durationMinutes": 240,
+              "ageRating": "16 anos",
+              "venue": {
+                "venueId": "00000003-0000-4000-8000-000000000001",
+                "name": "Concha Acústica",
+                "city": "Salvador",
+                "address": "Praça Dois de Julho, Campo Grande"
+              },
+              "sessions": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000004",
+                  "eventId": "00000001-0000-4000-8000-000000000003",
+                  "venueId": "00000003-0000-4000-8000-000000000001",
+                  "startsAt": "2026-11-22T19:00:00Z",
+                  "priceCents": 16000
+                }
+              ]
+            },
+            {
+              "eventId": "00000001-0000-4000-8000-000000000004",
+              "title": "Ideias em Movimento",
+              "category": "Conferência",
+              "subtitle": "O próximo encontro começa com uma ideia.",
+              "description": "Conversas e experiências sobre criatividade, tecnologia e futuros possíveis, com profissionais de diferentes áreas.",
+              "venueId": "00000003-0000-4000-8000-000000000003",
+              "priceFromCents": 6000,
+              "color": "green",
+              "artwork": "ideas",
+              "durationMinutes": 180,
+              "ageRating": "Livre",
+              "venue": {
+                "venueId": "00000003-0000-4000-8000-000000000003",
+                "name": "Casa do Comércio",
+                "city": "Salvador",
+                "address": "Av. Tancredo Neves, 1109"
+              },
+              "sessions": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000005",
+                  "eventId": "00000001-0000-4000-8000-000000000004",
+                  "venueId": "00000003-0000-4000-8000-000000000003",
+                  "startsAt": "2026-11-25T17:00:00Z",
+                  "priceCents": 6000
+                }
+              ]
+            }
+          ],
+          "pagination": {
+            "page": 1,
+            "limit": 20,
+            "totalItems": 4,
+            "totalPages": 1
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/events/00000001-0000-4000-8000-000000000001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "eventId": "00000001-0000-4000-8000-000000000001",
+          "title": "Noites de Jazz",
+          "category": "Música",
+          "subtitle": "Uma noite para sentir cada nota.",
+          "description": "Um encontro entre o jazz e os ritmos da Bahia. Quarteto ao vivo, convidados especiais e uma noite sob as estrelas.",
+          "venueId": "00000003-0000-4000-8000-000000000001",
+          "priceFromCents": 12000,
+          "color": "pink",
+          "artwork": "jazz",
+          "durationMinutes": 120,
+          "ageRating": "12 anos",
+          "venue": {
+            "venueId": "00000003-0000-4000-8000-000000000001",
+            "name": "Concha Acústica",
+            "city": "Salvador",
+            "address": "Praça Dois de Julho, Campo Grande"
+          },
+          "sessions": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "eventId": "00000001-0000-4000-8000-000000000001",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "startsAt": "2026-11-20T22:00:00Z",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000002",
+              "eventId": "00000001-0000-4000-8000-000000000001",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "startsAt": "2026-11-21T22:00:00Z",
+              "priceCents": 12000
+            }
+          ]
+        }
+      },
+      "errors": [
+        {
+          "status": 404,
+          "body": {
+            "error": {
+              "code": "RESOURCE_NOT_FOUND",
+              "message": "Recurso não encontrado.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/events/00000001-0000-4000-8000-000000000001/sessions",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "eventId": "00000001-0000-4000-8000-000000000001",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "startsAt": "2026-11-20T22:00:00Z",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000002",
+              "eventId": "00000001-0000-4000-8000-000000000001",
+              "venueId": "00000003-0000-4000-8000-000000000001",
+              "startsAt": "2026-11-21T22:00:00Z",
+              "priceCents": 12000
+            }
+          ]
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/sessions/00000002-0000-4000-8000-000000000001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "sessionId": "00000002-0000-4000-8000-000000000001",
+          "eventId": "00000001-0000-4000-8000-000000000001",
+          "venueId": "00000003-0000-4000-8000-000000000001",
+          "startsAt": "2026-11-20T22:00:00Z",
+          "priceCents": 12000,
+          "venue": {
+            "venueId": "00000003-0000-4000-8000-000000000001",
+            "name": "Concha Acústica",
+            "city": "Salvador",
+            "address": "Praça Dois de Julho, Campo Grande"
+          }
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/sessions/00000002-0000-4000-8000-000000000001/seats",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "sessionId": "00000002-0000-4000-8000-000000000001",
+          "seats": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000001",
+              "section": "Plateia",
+              "row": "A",
+              "number": "01",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000002",
+              "section": "Plateia",
+              "row": "A",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000003",
+              "section": "Plateia",
+              "row": "A",
+              "number": "03",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000004",
+              "section": "Plateia",
+              "row": "A",
+              "number": "04",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000005",
+              "section": "Plateia",
+              "row": "A",
+              "number": "05",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000006",
+              "section": "Plateia",
+              "row": "A",
+              "number": "06",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000007",
+              "section": "Plateia",
+              "row": "A",
+              "number": "07",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000008",
+              "section": "Plateia",
+              "row": "A",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000009",
+              "section": "Plateia",
+              "row": "B",
+              "number": "01",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000010",
+              "section": "Plateia",
+              "row": "B",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000011",
+              "section": "Plateia",
+              "row": "B",
+              "number": "03",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000012",
+              "section": "Plateia",
+              "row": "B",
+              "number": "04",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000013",
+              "section": "Plateia",
+              "row": "B",
+              "number": "05",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000014",
+              "section": "Plateia",
+              "row": "B",
+              "number": "06",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000015",
+              "section": "Plateia",
+              "row": "B",
+              "number": "07",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000016",
+              "section": "Plateia",
+              "row": "B",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000017",
+              "section": "Plateia",
+              "row": "C",
+              "number": "01",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000018",
+              "section": "Plateia",
+              "row": "C",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000019",
+              "section": "Plateia",
+              "row": "C",
+              "number": "03",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000020",
+              "section": "Plateia",
+              "row": "C",
+              "number": "04",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000021",
+              "section": "Plateia",
+              "row": "C",
+              "number": "05",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000022",
+              "section": "Plateia",
+              "row": "C",
+              "number": "06",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000023",
+              "section": "Plateia",
+              "row": "C",
+              "number": "07",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000024",
+              "section": "Plateia",
+              "row": "C",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000025",
+              "section": "Plateia",
+              "row": "D",
+              "number": "01",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000026",
+              "section": "Plateia",
+              "row": "D",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000027",
+              "section": "Plateia",
+              "row": "D",
+              "number": "03",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000028",
+              "section": "Plateia",
+              "row": "D",
+              "number": "04",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000029",
+              "section": "Plateia",
+              "row": "D",
+              "number": "05",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000030",
+              "section": "Plateia",
+              "row": "D",
+              "number": "06",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000031",
+              "section": "Plateia",
+              "row": "D",
+              "number": "07",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000032",
+              "section": "Plateia",
+              "row": "D",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000033",
+              "section": "Plateia",
+              "row": "E",
+              "number": "01",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000034",
+              "section": "Plateia",
+              "row": "E",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000035",
+              "section": "Plateia",
+              "row": "E",
+              "number": "03",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000036",
+              "section": "Plateia",
+              "row": "E",
+              "number": "04",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000037",
+              "section": "Plateia",
+              "row": "E",
+              "number": "05",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000038",
+              "section": "Plateia",
+              "row": "E",
+              "number": "06",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000039",
+              "section": "Plateia",
+              "row": "E",
+              "number": "07",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000040",
+              "section": "Plateia",
+              "row": "E",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000041",
+              "section": "Plateia",
+              "row": "F",
+              "number": "01",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000042",
+              "section": "Plateia",
+              "row": "F",
+              "number": "02",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000043",
+              "section": "Plateia",
+              "row": "F",
+              "number": "03",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000044",
+              "section": "Plateia",
+              "row": "F",
+              "number": "04",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000045",
+              "section": "Plateia",
+              "row": "F",
+              "number": "05",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000046",
+              "section": "Plateia",
+              "row": "F",
+              "number": "06",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000047",
+              "section": "Plateia",
+              "row": "F",
+              "number": "07",
+              "status": "SOLD",
+              "priceCents": 12000
+            },
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatId": "00000004-0000-4000-8000-000000000048",
+              "section": "Plateia",
+              "row": "F",
+              "number": "08",
+              "status": "AVAILABLE",
+              "priceCents": 12000
+            }
+          ]
+        }
+      },
+      "errors": []
+    }
+  ]
+}

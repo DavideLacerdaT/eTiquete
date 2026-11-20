@@ -1,0 +1,52 @@
+[
+  {
+    "id": "happy-path",
+    "label": "Compra aprovada",
+    "description": "Admissão, reserva, pagamento, confirmação e notificação."
+  },
+  {
+    "id": "queue",
+    "label": "Fila de espera",
+    "description": "A admissão permanece em WAITING por 8 segundos."
+  },
+  {
+    "id": "seat-conflict",
+    "label": "Assento disputado",
+    "description": "A aquisição retorna 409 SEAT_UNAVAILABLE sem reserva parcial."
+  },
+  {
+    "id": "payment-declined",
+    "label": "Pagamento recusado",
+    "description": "O pedido é compensado e os assentos são liberados."
+  },
+  {
+    "id": "reservation-expired",
+    "label": "Reserva expirada",
+    "description": "TTL de 5 segundos para testar o contador e a expiração."
+  },
+  {
+    "id": "late-payment",
+    "label": "Pagamento tardio",
+    "description": "A reserva expira antes da aprovação; o pagamento é estornado."
+  },
+  {
+    "id": "refund-failed",
+    "label": "Estorno com falha",
+    "description": "O cancelamento permanece REFUND_PENDING, com intervenção necessária."
+  },
+  {
+    "id": "notification-failed",
+    "label": "Notificação com falha",
+    "description": "A compra é confirmada, mas a entrega da notificação falha."
+  },
+  {
+    "id": "unavailable",
+    "label": "Dependência indisponível",
+    "description": "Respostas 503 explícitas, sem fallback para sucesso simulado."
+  },
+  {
+    "id": "empty",
+    "label": "Catálogo vazio",
+    "description": "Lista vazia para validar o estado sem resultados."
+  }
+]

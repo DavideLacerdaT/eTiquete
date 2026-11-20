@@ -1,0 +1,43 @@
+# Usa os simuladores em processos separados, HTTP e Kafka reais.
+# docker compose --profile microservices -f docker-compose.yml -f docker-compose.integration.yml up --build
+x-live: &live
+  DATA_MODE: live
+  CATALOG_MODE: live
+  ADMISSIONS_MODE: live
+  RESERVATIONS_MODE: live
+  ORDERS_MODE: live
+  PAYMENTS_MODE: live
+  NOTIFICATIONS_MODE: live
+  MESSAGING_MODE: kafka
+  DEPENDENCY_TIMEOUT_MS: 15000
+
+x-ready: &ready
+  kafka:
+    condition: service_healthy
+
+services:
+  gateway:
+    environment:
+      <<: *live
+      MESSAGING_MODE: mock
+  mock-hub:
+    environment: *live
+    depends_on: *ready
+  catalog:
+    environment: *live
+    depends_on: *ready
+  admissions:
+    environment: *live
+    depends_on: *ready
+  reservations:
+    environment: *live
+    depends_on: *ready
+  orders:
+    environment: *live
+    depends_on: *ready
+  payments:
+    environment: *live
+    depends_on: *ready
+  notifications:
+    environment: *live
+    depends_on: *ready

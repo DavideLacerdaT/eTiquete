@@ -1,0 +1,172 @@
+{
+  "contractVersion": 1,
+  "service": "payments",
+  "responsibility": "Cobrança simulada, idempotência por pedido e estorno.",
+  "fixtures": {
+    "payments": [
+      {
+        "paymentId": "00000007-0000-4000-8000-000000000001",
+        "orderId": "00000006-0000-4000-8000-000000000001",
+        "reservationId": "00000005-0000-4000-8000-000000000001",
+        "amountCents": 8000,
+        "currency": "BRL",
+        "method": "SIMULATED",
+        "status": "SUCCEEDED",
+        "paidAt": "2026-11-18T18:00:30Z"
+      },
+      {
+        "paymentId": "00000007-0000-4000-8000-000000000002",
+        "orderId": "00000006-0000-4000-8000-000000000002",
+        "reservationId": "00000005-0000-4000-8000-000000000003",
+        "amountCents": 16000,
+        "currency": "BRL",
+        "method": "SIMULATED",
+        "status": "FAILED",
+        "failureCode": "PAYMENT_DECLINED"
+      }
+    ],
+    "refunded": {
+      "paymentId": "00000007-0000-4000-8000-000000000001",
+      "orderId": "00000006-0000-4000-8000-000000000001",
+      "reservationId": "00000005-0000-4000-8000-000000000001",
+      "amountCents": 8000,
+      "currency": "BRL",
+      "method": "SIMULATED",
+      "status": "REFUNDED",
+      "paidAt": "2026-11-18T18:00:30Z",
+      "refundId": "00000011-0000-4000-8000-000000000001",
+      "refundedAt": "2026-11-19T15:01:00Z"
+    }
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/payments",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "amountCents": 12000,
+          "currency": "BRL",
+          "method": "SIMULATED"
+        }
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "paymentId": "00000007-0000-4000-8000-000000000003",
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "amountCents": 12000,
+          "currency": "BRL",
+          "method": "SIMULATED",
+          "status": "PENDING"
+        }
+      },
+      "errors": [
+        {
+          "status": 400,
+          "body": {
+            "error": {
+              "code": "VALIDATION_ERROR",
+              "message": "Revise os campos informados.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        },
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "IDEMPOTENCY_KEY_REUSED",
+              "message": "Esta chave já foi usada com outro conteúdo.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/payments/00000007-0000-4000-8000-000000000001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "amountCents": 8000,
+          "currency": "BRL",
+          "method": "SIMULATED",
+          "status": "SUCCEEDED",
+          "paidAt": "2026-11-18T18:00:30Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/payments/00000007-0000-4000-8000-000000000001/refund",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "reason": "CUSTOMER_REQUEST"
+        }
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "status": "REFUND_PENDING"
+        }
+      },
+      "errors": [
+        {
+          "status": 503,
+          "body": {
+            "error": {
+              "code": "DEPENDENCY_UNAVAILABLE",
+              "message": "Dependência indisponível.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

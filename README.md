@@ -49,6 +49,30 @@ Não há serviço, teste ou dashboard correspondente no repositório. O Compose 
 
 ## Execução local
 
+### Frontend e mocks independentes
+
+Com Node 22.13+ e pnpm 11.25:
+
+```bash
+npm install -g pnpm@11.25.0
+pnpm install --frozen-lockfile
+pnpm dev
+```
+
+Abra **http://localhost:5173**. O frontend React inclui painel, catálogo, agenda, seleção de até dois assentos entre sessões, fila, reserva com contador, pagamento simulado, acompanhamento, cancelamento e notificações. O **Laboratório** alterna entre mocks no navegador e `/api/v1` no Gateway e permite exercitar cenários de sucesso e falha.
+
+Cada microsserviço pode executar sozinho (`pnpm dev:service orders`, por exemplo). Os adaptadores aceitam `mock`/`live` por dependência, sem fallback silencioso. Para uma compra entre vários processos, use o hub compartilhado (`pnpm dev:mocks`).
+
+- [Guia completo de execução, modos e contratos complementares](docs/desenvolvimento.md)
+- [Padrões de interface baseados na referência visual](docs/padroes-interface.md)
+- [Regra arquitetural dos adaptadores](docs/adr/0003-mocks-e-adaptadores.md)
+- [Exemplos estáticos por microsserviço](mocks/contracts/)
+- [Regras obrigatórias de contribuição](AGENTS.md)
+
+`pnpm test` verifica os contratos e fluxos; `pnpm build` gera `frontend/dist`. **Os serviços novos são simuladores em memória**, inclusive quando se comunicam por HTTP/Kafka reais. PostgreSQL, Inbox/Outbox transacionais e recuperação de produção continuam como trabalho de cada domínio.
+
+### Contêineres
+
 Para iniciar os contêineres e suas dependências:
 
 ```bash
@@ -67,11 +91,12 @@ O Compose sobe hoje:
 |---|---|
 | Frontend | http://localhost:8080/ |
 | Backend | http://localhost:8080/api/ |
+| API v1 / Gateway | http://localhost:8080/api/v1/events |
 | Saúde do Nginx | http://localhost:8080/health |
 | PostgreSQL | localhost:5432 |
 | Kafka | localhost:9092 na máquina; kafka:9092 entre contêineres |
 
-`frontend` e `backend` são imagens construídas no repositório. O Kafka é o broker oficial da arquitetura e já sobe com o Compose.
+`frontend`, `backend`, `gateway` e `mock-hub` são imagens construídas no repositório. O backend anterior conserva suas rotas em `/api/`. O Kafka é o broker oficial da arquitetura e já sobe com o Compose. O perfil `microservices` adiciona os seis serviços independentes; `docker-compose.integration.yml` conecta esses processos por HTTP/Kafka. Veja os comandos e limites no guia de desenvolvimento.
 
 As configurações de execução e credenciais de desenvolvimento devem ser consultadas no arquivo `.env.example`.
 
@@ -130,9 +155,9 @@ Em desenvolvimento.
 
 ## GitHub Actions
 
-O workflow [`deploy.yml`](.github/workflows/deploy.yml) atualmente apenas valida o Compose, constrói as imagens dos serviços e verifica a saúde da aplicação em um runner do GitHub Actions. Não há deploy automático para servidor neste momento.
+O workflow [`deploy.yml`](.github/workflows/deploy.yml) executa testes de contratos, build do frontend, validação do Compose, construção das imagens e smoke check da API v1 e da página em um runner do GitHub Actions. Não há deploy automático para servidor neste momento.
 
-As imagens construídas são as imagens locais dos serviços `frontend` e `backend`, definidos no [`docker-compose.yml`](docker-compose.yml). PostgreSQL, Kafka e Nginx utilizam imagens oficiais do Docker Hub.
+As imagens locais estão definidas no [`docker-compose.yml`](docker-compose.yml). PostgreSQL, Kafka e Nginx utilizam imagens oficiais do Docker Hub.
 
 ## Declaração de uso de IA
 

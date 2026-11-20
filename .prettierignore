@@ -1,0 +1,6 @@
+node_modules/
+.local/
+frontend/dist/
+coverage/
+pnpm-lock.yaml
+entregas/

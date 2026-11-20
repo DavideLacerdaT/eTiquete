@@ -1,0 +1,88 @@
+{
+  "contractVersion": 1,
+  "service": "gateway",
+  "responsibility": "Entrada HTTP única; roteamento e propagação de correlação.",
+  "fixtures": {
+    "baseUrl": "/api/v1",
+    "routing": {
+      "events": "catalog",
+      "sessions": "catalog",
+      "sessions/:id/seats": "reservations",
+      "admissions": "admissions",
+      "reservations": "reservations",
+      "orders": "orders",
+      "payments": "payments",
+      "notifications": "notifications"
+    }
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/_dev/services",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "service": "gateway",
+          "dependencies": {
+            "catalog": {
+              "mode": "mock"
+            },
+            "admissions": {
+              "mode": "mock"
+            },
+            "reservations": {
+              "mode": "mock"
+            },
+            "orders": {
+              "mode": "mock"
+            },
+            "payments": {
+              "mode": "mock"
+            },
+            "notifications": {
+              "mode": "mock"
+            }
+          }
+        }
+      },
+      "errors": []
+    }
+  ],
+  "errors": [
+    {
+      "status": 429,
+      "body": {
+        "error": {
+          "code": "RATE_LIMITED",
+          "message": "Limite de requisições atingido.",
+          "details": {},
+          "correlationId": "00000009-0000-4000-8000-000000000001"
+        }
+      }
+    },
+    {
+      "status": 503,
+      "body": {
+        "error": {
+          "code": "DEPENDENCY_UNAVAILABLE",
+          "message": "Dependência indisponível.",
+          "details": {},
+          "correlationId": "00000009-0000-4000-8000-000000000001"
+        }
+      }
+    }
+  ]
+}

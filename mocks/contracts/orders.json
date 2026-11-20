@@ -1,0 +1,247 @@
+{
+  "contractVersion": 1,
+  "service": "orders",
+  "responsibility": "Pedidos e orquestração da SAGA.",
+  "fixtures": {
+    "orders": [
+      {
+        "orderId": "00000006-0000-4000-8000-000000000001",
+        "sagaId": "00000006-0000-4000-8000-000000000001",
+        "reservationId": "00000005-0000-4000-8000-000000000001",
+        "paymentId": "00000007-0000-4000-8000-000000000001",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000003",
+            "seatIds": ["00000004-0000-4000-8000-000000000204"]
+          }
+        ],
+        "amountCents": 8000,
+        "status": "CONFIRMED",
+        "sagaStatus": "COMPLETED",
+        "createdAt": "2026-11-18T18:00:00Z",
+        "confirmedAt": "2026-11-18T18:01:00Z"
+      },
+      {
+        "orderId": "00000006-0000-4000-8000-000000000002",
+        "sagaId": "00000006-0000-4000-8000-000000000002",
+        "reservationId": "00000005-0000-4000-8000-000000000003",
+        "paymentId": "00000007-0000-4000-8000-000000000002",
+        "username": "marina",
+        "items": [
+          {
+            "sessionId": "00000002-0000-4000-8000-000000000004",
+            "seatIds": ["00000004-0000-4000-8000-000000000302"]
+          }
+        ],
+        "amountCents": 16000,
+        "status": "CANCELLED",
+        "sagaStatus": "COMPENSATED",
+        "createdAt": "2026-11-17T17:00:00Z",
+        "failureCode": "PAYMENT_DECLINED"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/orders",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "paymentMethod": "SIMULATED"
+        }
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "sagaId": "00000006-0000-4000-8000-000000000003",
+          "status": "PENDING",
+          "sagaStatus": "RUNNING",
+          "createdAt": "2026-11-19T15:00:00Z"
+        }
+      },
+      "errors": [
+        {
+          "status": 400,
+          "body": {
+            "error": {
+              "code": "VALIDATION_ERROR",
+              "message": "Revise os campos informados.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        },
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "IDEMPOTENCY_KEY_REUSED",
+              "message": "Esta chave já foi usada com outro conteúdo.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/orders/00000006-0000-4000-8000-000000000001",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "sagaId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000003",
+              "seatIds": ["00000004-0000-4000-8000-000000000204"]
+            }
+          ],
+          "amountCents": 8000,
+          "status": "CONFIRMED",
+          "sagaStatus": "COMPLETED",
+          "createdAt": "2026-11-18T18:00:00Z",
+          "confirmedAt": "2026-11-18T18:01:00Z"
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/v1/orders/00000006-0000-4000-8000-000000000001/timeline",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "items": [
+            {
+              "status": "PENDING",
+              "label": "Pedido recebido",
+              "occurredAt": "2026-11-18T18:00:00Z"
+            },
+            {
+              "status": "CONFIRMED",
+              "label": "Ingressos confirmados",
+              "occurredAt": "2026-11-18T18:01:00Z"
+            }
+          ]
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/v1/orders/00000006-0000-4000-8000-000000000001/cancel",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": {
+          "reason": "CUSTOMER_REQUEST"
+        }
+      },
+      "response": {
+        "status": 202,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "sagaId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000003",
+              "seatIds": ["00000004-0000-4000-8000-000000000204"]
+            }
+          ],
+          "amountCents": 8000,
+          "status": "REFUND_PENDING",
+          "sagaStatus": "COMPENSATING",
+          "createdAt": "2026-11-18T18:00:00Z",
+          "confirmedAt": "2026-11-18T18:01:00Z"
+        }
+      },
+      "errors": [
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "IDEMPOTENCY_KEY_REUSED",
+              "message": "Esta chave já foi usada com outro conteúdo.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        },
+        {
+          "status": 409,
+          "body": {
+            "error": {
+              "code": "INVALID_STATE_TRANSITION",
+              "message": "Pedido não confirmado.",
+              "details": {},
+              "correlationId": "00000009-0000-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

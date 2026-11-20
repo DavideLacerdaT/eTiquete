@@ -1,0 +1,500 @@
+{
+  "commands": [
+    {
+      "topic": "etiquete.reservations.commands",
+      "key": "00000005-0000-4000-8000-000000000004",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000001",
+        "messageType": "reservation.hold",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000005-0000-4000-8000-000000000004",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "expiresInSeconds": 600
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.commands",
+      "key": "00000006-0000-4000-8000-000000000003",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000002",
+        "messageType": "reservation.confirm",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000003",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "reservationId": "00000005-0000-4000-8000-000000000004"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.commands",
+      "key": "00000006-0000-4000-8000-000000000003",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000003",
+        "messageType": "reservation.release",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000003",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "reason": "PAYMENT_DECLINED"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.commands",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000004",
+        "messageType": "reservation.cancel",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "reason": "CUSTOMER_REQUEST"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.payments.commands",
+      "key": "00000006-0000-4000-8000-000000000003",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000005",
+        "messageType": "payment.charge",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000003",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000003",
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "amountCents": 12000,
+          "currency": "BRL",
+          "method": "SIMULATED"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.payments.commands",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000006",
+        "messageType": "payment.refund",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "reason": "CUSTOMER_REQUEST"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.notifications.commands",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000012-0000-4000-8000-000000000007",
+        "messageType": "notification.send",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "username": "marina",
+          "customerId": null,
+          "template": "ORDER_CONFIRMED",
+          "data": {
+            "amountCents": 8000
+          }
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "topic": "etiquete.orders.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000001",
+        "messageType": "order.created",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000003",
+              "seatIds": ["00000004-0000-4000-8000-000000000204"]
+            }
+          ],
+          "amountCents": 8000
+        }
+      }
+    },
+    {
+      "topic": "etiquete.orders.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000002",
+        "messageType": "order.confirmed",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "confirmedAt": "2026-11-18T18:01:00Z"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.orders.events",
+      "key": "00000006-0000-4000-8000-000000000002",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000003",
+        "messageType": "order.cancelled",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "orders-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": null,
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000002",
+        "payload": {
+          "orderId": "00000006-0000-4000-8000-000000000002",
+          "reason": "PAYMENT_DECLINED",
+          "cancelledAt": "2026-11-17T17:01:00Z"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.events",
+      "key": "00000005-0000-4000-8000-000000000004",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000004",
+        "messageType": "reservation.held",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "reservations-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000001",
+        "aggregateType": "Reservation",
+        "aggregateId": "00000005-0000-4000-8000-000000000004",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000004",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000001"]
+            }
+          ],
+          "status": "HELD",
+          "expiresAt": "2026-11-19T15:10:00Z",
+          "amountCents": 12000
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000005",
+        "messageType": "reservation.confirmed",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "reservations-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000001",
+        "aggregateType": "Reservation",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000003",
+              "seatIds": ["00000004-0000-4000-8000-000000000204"]
+            }
+          ],
+          "status": "CONFIRMED",
+          "expiresAt": "2026-11-18T18:10:00Z",
+          "confirmedAt": "2026-11-18T18:01:00Z",
+          "amountCents": 8000,
+          "orderId": "00000006-0000-4000-8000-000000000001"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.events",
+      "key": "00000005-0000-4000-8000-000000000002",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000006",
+        "messageType": "reservation.expired",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "reservations-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000001",
+        "aggregateType": "Reservation",
+        "aggregateId": "00000005-0000-4000-8000-000000000002",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000002",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000001",
+              "seatIds": ["00000004-0000-4000-8000-000000000002"]
+            }
+          ],
+          "status": "EXPIRED",
+          "expiresAt": "2026-11-18T17:10:00Z",
+          "amountCents": 12000
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.events",
+      "key": "00000006-0000-4000-8000-000000000002",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000007",
+        "messageType": "reservation.released",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "reservations-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000001",
+        "aggregateType": "Reservation",
+        "aggregateId": "00000006-0000-4000-8000-000000000002",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000003",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000004",
+              "seatIds": ["00000004-0000-4000-8000-000000000302"]
+            }
+          ],
+          "status": "RELEASED",
+          "expiresAt": "2026-11-17T17:10:00Z",
+          "amountCents": 16000
+        }
+      }
+    },
+    {
+      "topic": "etiquete.reservations.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000008",
+        "messageType": "reservation.cancelled",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "reservations-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000001",
+        "aggregateType": "Reservation",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "username": "marina",
+          "items": [
+            {
+              "sessionId": "00000002-0000-4000-8000-000000000003",
+              "seatIds": ["00000004-0000-4000-8000-000000000204"]
+            }
+          ],
+          "status": "CONFIRMED",
+          "expiresAt": "2026-11-18T18:10:00Z",
+          "confirmedAt": "2026-11-18T18:01:00Z",
+          "amountCents": 8000,
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "cancelledAt": "2026-11-19T15:01:00Z",
+          "cancellationReason": "CUSTOMER_REQUEST"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.payments.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000009",
+        "messageType": "payment.succeeded",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "payments-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000005",
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "amountCents": 8000,
+          "currency": "BRL",
+          "method": "SIMULATED",
+          "status": "SUCCEEDED",
+          "paidAt": "2026-11-18T18:00:30Z"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.payments.events",
+      "key": "00000006-0000-4000-8000-000000000002",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000010",
+        "messageType": "payment.failed",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "payments-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000005",
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000002",
+        "payload": {
+          "paymentId": "00000007-0000-4000-8000-000000000002",
+          "orderId": "00000006-0000-4000-8000-000000000002",
+          "reservationId": "00000005-0000-4000-8000-000000000003",
+          "amountCents": 16000,
+          "currency": "BRL",
+          "method": "SIMULATED",
+          "status": "FAILED",
+          "failureCode": "PAYMENT_DECLINED"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.payments.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000011",
+        "messageType": "payment.refunded",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "payments-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000005",
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "paymentId": "00000007-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "reservationId": "00000005-0000-4000-8000-000000000001",
+          "amountCents": 8000,
+          "currency": "BRL",
+          "method": "SIMULATED",
+          "status": "REFUNDED",
+          "paidAt": "2026-11-18T18:00:30Z",
+          "refundId": "00000011-0000-4000-8000-000000000001",
+          "refundedAt": "2026-11-19T15:01:00Z"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.notifications.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000012",
+        "messageType": "notification.sent",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "notifications-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000007",
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "notificationId": "00000008-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "username": "marina",
+          "template": "ORDER_CONFIRMED",
+          "title": "Seu lugar está garantido!",
+          "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+          "status": "SENT",
+          "createdAt": "2026-11-18T18:01:00Z",
+          "sentAt": "2026-11-18T18:01:02Z"
+        }
+      }
+    },
+    {
+      "topic": "etiquete.notifications.events",
+      "key": "00000006-0000-4000-8000-000000000001",
+      "value": {
+        "messageId": "00000013-0000-4000-8000-000000000013",
+        "messageType": "notification.failed",
+        "messageVersion": 1,
+        "occurredAt": "2026-11-19T15:00:00Z",
+        "producer": "notifications-service",
+        "correlationId": "00000009-0000-4000-8000-000000000001",
+        "causationId": "00000012-0000-4000-8000-000000000007",
+        "aggregateType": "Order",
+        "aggregateId": "00000006-0000-4000-8000-000000000001",
+        "payload": {
+          "notificationId": "00000008-0000-4000-8000-000000000001",
+          "orderId": "00000006-0000-4000-8000-000000000001",
+          "username": "marina",
+          "template": "ORDER_CONFIRMED",
+          "title": "Seu lugar está garantido!",
+          "message": "A compra de Entre Atos foi confirmada. Agora é só esperar o grande dia.",
+          "status": "FAILED",
+          "createdAt": "2026-11-18T18:01:00Z",
+          "sentAt": null,
+          "failureCode": "DELIVERY_FAILED"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+/* Fonte de verdade visual. Novas telas devem reutilizar estes tokens. */
+:root {
+  --canvas: #f7f3e8;
+  --ink: #171915;
+  --muted: #696b60;
+  --surface-muted: #eee9dc;
+  --line: #ddd8ca;
+  --pink: #edb6d6;
+  --yellow: #f2d96b;
+  --green: #b1bf83;
+  --blue: #b3c9e9;
+  --focus: #4d5f92;
+  --radius-card: 18px;
+  --radius-control: 10px;
+  --space-unit: 4px;
+}

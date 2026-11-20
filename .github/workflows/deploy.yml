@@ -19,6 +19,22 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        run: npm install -g pnpm@11.25.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate contracts and build frontend
+        run: |
+          pnpm test
+          pnpm build
+
       - name: Validate Compose configuration
         run: docker compose config --quiet
 
@@ -31,7 +47,7 @@ jobs:
       - name: Check gateway health
         run: |
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:8080/health; then
+            if curl --fail --silent http://127.0.0.1:8080/api/v1/events && curl --fail --silent http://127.0.0.1:8080/; then
               exit 0
             fi
             sleep 2
