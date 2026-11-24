@@ -84,12 +84,7 @@
               "sentAt": "2026-11-17T17:01:02Z"
             }
           ],
-          "pagination": {
-            "page": 1,
-            "limit": 20,
-            "totalItems": 2,
-            "totalPages": 1
-          }
+          "pagination": { "page": 1, "limit": 20, "totalItems": 2, "totalPages": 1 }
         }
       },
       "errors": []

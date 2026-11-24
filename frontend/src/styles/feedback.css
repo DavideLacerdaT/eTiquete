@@ -1,0 +1,71 @@
+.empty {
+  text-align: center;
+  padding: 60px 25px;
+  color: var(--muted);
+}
+
+.empty > svg {
+  color: #6d7951;
+  margin-bottom: 16px;
+}
+
+.empty h3 {
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.empty p {
+  font-size: 0.875rem;
+}
+
+.loading {
+  padding: 65px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--line);
+  border-top-color: var(--ink);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-notice {
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  border: 1px solid #c58388;
+  background: #f9e3e2;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+}
+
+.error-notice strong {
+  font-weight: 500;
+}
+
+.error-notice small {
+  margin-top: 5px;
+  color: #7d4049;
+  overflow-wrap: anywhere;
+}
+
+.error-notice .text-button {
+  display: flex;
+  margin-top: 6px;
+}

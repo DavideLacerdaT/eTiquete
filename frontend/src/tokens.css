@@ -13,4 +13,11 @@
   --radius-card: 18px;
   --radius-control: 10px;
   --space-unit: 4px;
+  --scrollbar-size: 6px;
+  --scrollbar-thumb: #7b876b99;
+  --scrollbar-thumb-hover: #7b876bd9;
+  --scrollbar-thumb-active: #657452;
+  --scrollbar-thumb-dark: #b1bf835c;
+  --scrollbar-thumb-dark-hover: #b1bf8399;
+  --scrollbar-thumb-dark-active: #b1bf83;
 }

@@ -19,23 +19,34 @@ export const factories = {
 
 export function createMockNetwork(options = {}) {
   let scenario = options.scenario || 'happy-path';
-  const messages = [],
-    domains = {};
+
+  const messages = [];
+
+  const domains = {};
+
   const network = {
     get scenario() {
       return scenario;
     },
     messages,
     setScenario(value) {
-      if (!scenarios.some((s) => s.id === value)) throw new Error('Cenário inválido.');
+      if (!scenarios.some((s) => s.id === value)) {
+        throw new Error('Cenário inválido.');
+      }
+
       scenario = value;
     },
     async request(service, method, path, body, context) {
       const ctx = contextWith({ scenario, ...context });
-      if (ctx.scenario === 'unavailable')
+
+      if (ctx.scenario === 'unavailable') {
         fail(503, 'DEPENDENCY_UNAVAILABLE', 'Serviço indisponível no cenário de teste.');
+      }
+
       const url = new URL(path, 'http://mock.local');
+
       const target = domains[service] || notFound();
+
       return target.handle(
         method,
         url.pathname.split('/').filter(Boolean),
@@ -46,9 +57,15 @@ export function createMockNetwork(options = {}) {
     },
     async command(service, type, payload, context) {
       const ctx = contextWith({ scenario, ...context });
-      if (!domains[service]?.command) return notFound();
-      if (ctx.scenario === 'unavailable')
+
+      if (!domains[service]?.command) {
+        return notFound();
+      }
+
+      if (ctx.scenario === 'unavailable') {
         fail(503, 'DEPENDENCY_UNAVAILABLE', 'Comando indisponível no cenário de teste.');
+      }
+
       const command = envelope(
         type,
         'orders-service',
@@ -56,15 +73,18 @@ export function createMockNetwork(options = {}) {
         payload,
         ctx,
       );
+
       messages.push({
         topic: `etiquete.${service}.commands`,
         key: command.aggregateId,
         ...command,
       });
+
       const result = await domains[service].command(type, payload, {
         ...ctx,
         messageId: command.messageId,
       });
+
       const typeMap = {
         'payment.charge': result.status === 'FAILED' ? 'payment.failed' : 'payment.succeeded',
         'payment.refund': 'payment.refunded',
@@ -75,6 +95,7 @@ export function createMockNetwork(options = {}) {
         'notification.send':
           result.status === 'FAILED' ? 'notification.failed' : 'notification.sent',
       };
+
       const event = envelope(
         typeMap[type] || type,
         `${service}-service`,
@@ -82,17 +103,24 @@ export function createMockNetwork(options = {}) {
         result,
         { ...ctx, messageId: command.messageId },
       );
+
       messages.push({ topic: `etiquete.${service}.events`, key: event.aggregateId, ...event });
+
       return structuredClone(result);
     },
     async api(method, path, body, context) {
       return network.request(routeService(path) || notFound(), method, path, body, context);
     },
     async settled() {
-      for (const domain of Object.values(domains)) await domain.settled?.();
+      for (const domain of Object.values(domains)) {
+        await domain.settled?.();
+      }
     },
   };
-  for (const [name, create] of Object.entries(factories))
+
+  for (const [name, create] of Object.entries(factories)) {
     domains[name] = create({ ...options, deps: options.deps || network });
+  }
+
   return network;
 }

@@ -32,6 +32,7 @@ jobs:
 
       - name: Validate contracts and build frontend
         run: |
+          pnpm format:check
           pnpm test
           pnpm build
 

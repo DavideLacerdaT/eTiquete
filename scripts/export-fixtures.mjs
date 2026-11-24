@@ -1,4 +1,6 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { format } from 'prettier';
+import { API_BASE_PATH, httpOperations } from '../shared/http-contract.js';
 import {
   events,
   sessions,
@@ -14,21 +16,36 @@ import {
 } from '../mocks/fixtures.js';
 
 const directory = new URL('../mocks/contracts/', import.meta.url);
+
 await mkdir(directory, { recursive: true });
+
+const formatting = JSON.parse(
+  await readFile(new URL('../.prettierrc.json', import.meta.url), 'utf8'),
+);
+
+async function writeJson(filename, content) {
+  const formatted = await format(JSON.stringify(content), { ...formatting, parser: 'json' });
+
+  await writeFile(new URL(filename, directory), formatted);
+}
+
 const headers = {
   'Content-Type': 'application/json',
   'X-Correlation-Id': id(9, 1),
   'Idempotency-Key': id(9, 2),
   'X-Admission-Token': 'fixture-admission-token',
 };
+
 const error = (status, code, message) => ({
   status,
   body: { error: { code, message, details: {}, correlationId: headers['X-Correlation-Id'] } },
 });
+
 const list = (items) => ({
   items,
   pagination: { page: 1, limit: 20, totalItems: items.length, totalPages: items.length ? 1 : 0 },
 });
+
 const example = (method, path, status, response, request = null, errors = []) => ({
   request: { method, path: `/api/v1${path}`, headers, body: request },
   response: {
@@ -41,10 +58,15 @@ const example = (method, path, status, response, request = null, errors = []) =>
   },
   errors,
 });
-const invalid = error(400, 'VALIDATION_ERROR', 'Revise os campos informados.'),
-  missing = error(404, 'RESOURCE_NOT_FOUND', 'Recurso não encontrado.');
+
+const invalid = error(400, 'VALIDATION_ERROR', 'Revise os campos informados.');
+
+const missing = error(404, 'RESOURCE_NOT_FOUND', 'Recurso não encontrado.');
+
 const reused = error(409, 'IDEMPOTENCY_KEY_REUSED', 'Esta chave já foi usada com outro conteúdo.');
+
 const unavailable = error(503, 'DEPENDENCY_UNAVAILABLE', 'Dependência indisponível.');
+
 const held = {
   reservationId: id(5, 4),
   username: 'marina',
@@ -53,11 +75,13 @@ const held = {
   expiresAt: '2026-11-19T15:10:00Z',
   amountCents: 12000,
 };
+
 const eventViews = events.map((event) => ({
   ...event,
   venue: venues.find((v) => v.venueId === event.venueId),
   sessions: sessions.filter((s) => s.eventId === event.eventId),
 }));
+
 const pendingPayment = {
   paymentId: id(7, 3),
   orderId: id(6, 3),
@@ -67,6 +91,7 @@ const pendingPayment = {
   method: 'SIMULATED',
   status: 'PENDING',
 };
+
 const admitted = {
   admissionTokenId: id(10, 1),
   eventId: id(1, 1),
@@ -75,21 +100,13 @@ const admitted = {
   token: 'fixture-admission-token',
   expiresAt: '2026-11-19T15:10:00Z',
 };
+
 const files = {
   gateway: {
     responsibility: 'Entrada HTTP única; roteamento e propagação de correlação.',
     fixtures: {
-      baseUrl: '/api/v1',
-      routing: {
-        events: 'catalog',
-        sessions: 'catalog',
-        'sessions/:id/seats': 'reservations',
-        admissions: 'admissions',
-        reservations: 'reservations',
-        orders: 'orders',
-        payments: 'payments',
-        notifications: 'notifications',
-      },
+      baseUrl: API_BASE_PATH,
+      operations: httpOperations,
     },
     examples: [
       example('GET', '/_dev/services', 200, {
@@ -147,6 +164,7 @@ const files = {
     responsibility: 'Inventário, aquisição atômica, confirmação, liberação e expiração.',
     fixtures: { seats, reservations: [...reservations, held] },
     examples: [
+      example('GET', '/reservations?username=marina', 200, list(reservations)),
       example(
         'POST',
         '/reservations',
@@ -182,6 +200,7 @@ const files = {
     responsibility: 'Pedidos e orquestração da SAGA.',
     fixtures: { orders },
     examples: [
+      example('GET', '/orders?username=marina', 200, list(orders)),
       example(
         'POST',
         '/orders',
@@ -286,11 +305,11 @@ const files = {
     ],
   },
 };
-for (const [name, content] of Object.entries(files))
-  await writeFile(
-    new URL(`${name}.json`, directory),
-    JSON.stringify({ contractVersion: 1, service: name, ...content }, null, 2) + '\n',
-  );
+
+for (const [name, content] of Object.entries(files)) {
+  await writeJson(`${name}.json`, { contractVersion: 1, service: name, ...content });
+}
+
 const commands = [
   [
     'reservation.hold',
@@ -356,6 +375,7 @@ const commands = [
     payload,
   },
 }));
+
 const eventExamples = [
   [
     'order.created',
@@ -427,9 +447,9 @@ const eventExamples = [
     payload,
   },
 }));
-await writeFile(
-  new URL('messages.json', directory),
-  JSON.stringify({ commands, events: eventExamples }, null, 2) + '\n',
-);
-await writeFile(new URL('scenarios.json', directory), JSON.stringify(scenarios, null, 2) + '\n');
+
+await writeJson('messages.json', { commands, events: eventExamples });
+
+await writeJson('scenarios.json', scenarios);
+
 console.log(`Exportadas ${Object.keys(files).length} coleções de serviço, mensagens e cenários.`);

@@ -114,9 +114,7 @@
           "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
           "X-Admission-Token": "fixture-admission-token"
         },
-        "body": {
-          "token": "fixture-admission-token"
-        }
+        "body": { "token": "fixture-admission-token" }
       },
       "response": {
         "status": 200,

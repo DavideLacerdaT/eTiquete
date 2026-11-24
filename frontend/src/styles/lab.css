@@ -1,0 +1,95 @@
+.lab-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 22px;
+}
+
+.lab-panel > label {
+  max-width: 500px;
+  margin: 22px 0 10px;
+}
+
+.lab-panel > p {
+  margin: 13px 0 20px;
+  font-size: 0.875rem;
+}
+
+.mode-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 24px;
+}
+
+.mode-cards label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  position: relative;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.mode-cards label.chosen {
+  background: var(--blue);
+  border-color: #6f87ab;
+}
+
+.mode-cards input {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 17px;
+  min-height: 17px;
+  accent-color: var(--ink);
+}
+
+.mode-cards span {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.mode-cards strong {
+  font-size: 1rem;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.service-card {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  background: var(--surface-muted);
+  border-radius: 13px;
+  padding: 20px;
+}
+
+.service-card h3 {
+  margin: 15px 0 4px;
+}
+
+.service-card > small {
+  margin-bottom: 12px;
+  color: var(--muted);
+}
+
+.json-view {
+  background: var(--ink);
+  color: #e4e7d9;
+  padding: 22px;
+  border-radius: 14px;
+  max-height: 380px;
+  overflow: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.lab-panel h2 {
+  margin-bottom: 15px;
+}

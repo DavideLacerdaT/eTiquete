@@ -4,15 +4,25 @@ import { createStore, ok } from '../core.js';
 
 export function createNotifications() {
   const store = createStore(notifications, 'notificationId');
+
   return {
     async command(type, payload, context) {
-      if (type !== 'notification.send') return notFound();
+      if (type !== 'notification.send') {
+        return notFound();
+      }
+
       const old = store
         .list()
         .find((n) => n.orderId === payload.orderId && n.template === payload.template);
-      if (old) return structuredClone(old);
-      const confirmed = payload.template === 'ORDER_CONFIRMED',
-        failed = context.scenario === 'notification-failed';
+
+      if (old) {
+        return structuredClone(old);
+      }
+
+      const confirmed = payload.template === 'ORDER_CONFIRMED';
+
+      const failed = context.scenario === 'notification-failed';
+
       return store.put({
         notificationId: uuid(),
         orderId: payload.orderId,
@@ -29,7 +39,7 @@ export function createNotifications() {
       });
     },
     async handle(method, parts, body, context, query) {
-      if (method === 'GET' && parts.length === 1)
+      if (method === 'GET' && parts.length === 1) {
         return ok(
           paginate(
             store
@@ -39,7 +49,12 @@ export function createNotifications() {
             query,
           ),
         );
-      if (method === 'GET' && parts.length === 2) return ok(store.get(parts[1]));
+      }
+
+      if (method === 'GET' && parts.length === 2) {
+        return ok(store.get(parts[1]));
+      }
+
       return notFound();
     },
   };

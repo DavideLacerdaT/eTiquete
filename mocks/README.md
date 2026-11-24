@@ -1,6 +1,6 @@
 # Mocks contratuais
 
-`fixtures.js` define IDs, dados, datas e cenários estáveis. `contracts/` fornece JSON estático por serviço, além de mensagens e cenários. Execute `pnpm fixtures` para regenerar essas coleções após editar o gerador/dados.
+`fixtures/` separa IDs, catálogo, reservas, pedidos, pagamentos, notificações e cenários em arquivos próprios. `fixtures.js` reexporta esses dados para manter uma entrada comum. `contracts/` fornece JSON estático por serviço, além de mensagens e cenários. Execute `pnpm fixtures` para regenerar essas coleções após editar o gerador/dados; a saída já recebe a formatação do projeto.
 
 `services/` contém simuladores com comportamento: leitura, escrita em memória, transições, validação e efeitos assíncronos. `network.js` conecta esses domínios por adaptadores, sem acesso cruzado a estado.
 

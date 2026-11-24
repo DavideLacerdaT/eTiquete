@@ -16,6 +16,8 @@ Abra **http://localhost:5173**. O comando inicia Vite e Gateway (porta 3001). O 
 
 No menu **Laboratório**, selecione mock no navegador ou Gateway HTTP. Aplicar recarrega a página e reinicia os dados do navegador. A preferência fica em localStorage; os dados de negócio, não. O botão “Consultar exemplo” exercita cada contrato e mostra JSON. A seção de mensagens mostra comandos e eventos de compras realizadas na sessão.
 
+As URLs de navegação são `/eventos`, `/eventos/:eventId`, `/eventos/:eventId/checkout`, `/ingressos`, `/pedidos/:orderId`, `/notificacoes` e `/laboratorio`. Veja [estrutura React e contrato com o Gateway](frontend-gateway.md) para o mapa de chamadas, cabeçalhos e responsabilidades. No build, o padrão é Gateway; no Vite de desenvolvimento, mock. Uma preferência explícita do Laboratório ou `VITE_DATA_MODE` altera esse padrão.
+
 Para usar variáveis em arquivo no Node, o carregamento é explícito:
 
 ```sh
@@ -31,11 +33,20 @@ Copie `.env.example` para `.env` e ajuste. Vite lê variáveis `VITE_*` na pasta
 |---|---|
 | `frontend/src/` | Telas, componentes, API e design system |
 | `frontend/src/pages/` | Painel, catálogo, ingressos, detalhes, notificações e laboratório separados |
-| `mocks/fixtures.js` | Dados determinísticos e cenários |
+| `frontend/src/routes/` | URLs, parâmetros, consultas e composição das telas |
+| `frontend/src/services/` | Clientes por domínio, transporte e composição do catálogo |
+| `frontend/src/hooks/useResource.js` | Consulta cancelável, carregamento, erro e recuperação |
+| `frontend/src/components/layout/` | Menu lateral, busca e janela de ajuda |
+| `frontend/src/components/checkout/` | Seleção de lugares, mapa, fila, resumo e resultado |
+| `frontend/src/hooks/useCheckout.js` | Estado, reserva, pagamento e polling da compra |
+| `frontend/src/styles/` | CSS por área, importado na ordem de `styles.css` |
+| `mocks/fixtures/` | Dados determinísticos separados por domínio e cenários |
+| `mocks/fixtures.js` | Entrada comum que reexporta os dados de cada domínio |
 | `mocks/contracts/*.json` | Exemplos estáticos por serviço: requisição, resposta, erro e IDs |
 | `mocks/services/<domínio>.js` | Simulador isolado e estado pertencente ao domínio |
 | `mocks/network.js` | Rede em memória para frontend e testes |
 | `shared/contracts.js` | Erros, UUID, envelopes, paginação e roteamento |
+| `shared/http-contract.js` | Registro de métodos, caminhos, destinos, filtros e status HTTP |
 | `shared/config.js` | Política de configuração comum |
 | `shared/dependencies.js` | Adaptador mock/HTTP/Kafka por dependência |
 | `services/server.mjs` | Processo independente de um domínio |
@@ -55,6 +66,36 @@ Copie `.env.example` para `.env` e ajuste. Vite lê variáveis `VITE_*` na pasta
 | Mock hub | 3090 | Estados simulados separados por domínio | Mesma matriz de dependências da execução |
 
 Um domínio novo deve manter o mesmo par `handle`/`command` ou oferecer uma implementação compatível por HTTP/Kafka. O objeto `deps` é a fronteira de integração; não importar o estado de outro serviço.
+
+## Onde editar manualmente
+
+| Alteração | Arquivo ou diretório |
+|---|---|
+| Cores, raios e espaçamento base | `frontend/src/tokens.css` |
+| Menu, perfil e navegação lateral | `frontend/src/components/layout/Sidebar.jsx` |
+| Busca e ações do topo | `frontend/src/components/layout/Topbar.jsx` |
+| Conteúdo de uma tela | `frontend/src/pages/<tela>.jsx` |
+| Aparência de uma etapa da compra | `frontend/src/components/checkout/` |
+| Sequência de admissão, reserva e pagamento | `frontend/src/hooks/useCheckout.js` |
+| Estilos da compra ou de uma área | `frontend/src/styles/checkout.css` e demais arquivos da pasta |
+| Comportamento em celular e tablet | `frontend/src/styles/responsive.css` |
+| Eventos, locais, sessões e preços de exemplo | `mocks/fixtures/catalog.js` |
+| Assentos e reservas de exemplo | `mocks/fixtures/reservations.js` |
+| Pedidos, pagamentos ou notificações de exemplo | Arquivo do domínio em `mocks/fixtures/` |
+| Cenários de teste | `mocks/fixtures/scenarios.js` |
+| Exemplos de requisição e resposta gerados | `scripts/export-fixtures.mjs` |
+| Regras de um serviço simulado | `mocks/services/<domínio>.js` |
+
+O código usa instruções separadas, blocos explícitos e linhas em branco entre etapas. Prettier padroniza a apresentação de JavaScript, JSX, CSS, HTML, JSON e YAML; EditorConfig mantém indentação e quebras de linha entre editores.
+
+```sh
+pnpm format
+pnpm format:check
+```
+
+O primeiro comando formata o código; o segundo apenas verifica. Dependências, arquivos de build e lockfile são excluídos. A geração das fixtures já aplica o mesmo padrão, sem exigir ajustes manuais nos JSONs.
+
+`Checkout.jsx` compõe as etapas; `useCheckout.js` concentra estado e integração. Essa separação permite alterar o texto ou a apresentação de uma etapa sem procurar entre chamadas HTTP. A extração do CSS preserva a sequência das regras para manter a mesma cascata.
 
 ## Configuração de fontes
 

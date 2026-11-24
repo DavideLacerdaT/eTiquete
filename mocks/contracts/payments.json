@@ -139,9 +139,7 @@
           "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
           "X-Admission-Token": "fixture-admission-token"
         },
-        "body": {
-          "reason": "CUSTOMER_REQUEST"
-        }
+        "body": { "reason": "CUSTOMER_REQUEST" }
       },
       "response": {
         "status": 202,
@@ -149,10 +147,7 @@
           "Content-Type": "application/json",
           "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
         },
-        "body": {
-          "paymentId": "00000007-0000-4000-8000-000000000001",
-          "status": "REFUND_PENDING"
-        }
+        "body": { "paymentId": "00000007-0000-4000-8000-000000000001", "status": "REFUND_PENDING" }
       },
       "errors": [
         {

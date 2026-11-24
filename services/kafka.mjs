@@ -11,28 +11,39 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
     logLevel: logLevel.ERROR,
     retry: { retries: 3 },
   });
-  const producer = kafka.producer(),
-    pending = new Map(),
-    inbox = new Map();
+
+  const producer = kafka.producer();
+
+  const pending = new Map();
+
+  const inbox = new Map();
+
   const consumer = kafka.consumer({ groupId: `${name}-development`, allowAutoTopicCreation: true });
+
   await producer.connect();
+
   await consumer.connect();
+
   await consumer.subscribe({
     topics: [...services.map((s) => `etiquete.${s}.events`), `etiquete.${name}.commands`],
     fromBeginning: false,
   });
+
   const publish = (topic, message) =>
     producer.send({
       topic,
       acks: -1,
       messages: [{ key: message.aggregateId, value: JSON.stringify(message) }],
     });
+
   await consumer.run({
     autoCommit: false,
     eachMessage: async ({ topic, partition, message }) => {
       let event;
+
       try {
         event = JSON.parse(message.value.toString());
+
         if (
           !isUuid(event.messageId) ||
           !isUuid(event.aggregateId) ||
@@ -40,10 +51,12 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
           event.messageVersion !== 1 ||
           typeof event.messageType !== 'string' ||
           !event.payload
-        )
+        ) {
           throw new Error('Invalid envelope');
+        }
       } catch {
         event = null;
+
         await producer.send({
           topic: `${topic}.dlq`,
           messages: [
@@ -61,10 +74,13 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
           ],
         });
       }
+
       if (event && topic.endsWith('.commands')) {
         let result = inbox.get(event.messageId);
+
         if (!result) {
           let payload;
+
           try {
             payload = {
               result: await handler.command(event.messageType, event.payload, {
@@ -81,6 +97,7 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
               },
             };
           }
+
           const names = {
             'payment.charge':
               payload.result?.status === 'FAILED' ? 'payment.failed' : 'payment.succeeded',
@@ -92,6 +109,7 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
             'notification.send':
               payload.result?.status === 'FAILED' ? 'notification.failed' : 'notification.sent',
           };
+
           result = envelope(
             payload.error ? `${event.messageType}.failed` : names[event.messageType],
             `${name}-service`,
@@ -99,23 +117,33 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
             payload.error ? payload : payload.result,
             { correlationId: event.correlationId, messageId: event.messageId },
           );
+
           inbox.set(event.messageId, result);
         }
+
         await publish(`etiquete.${name}.events`, result);
       } else if (event && pending.has(event.causationId)) {
         const request = pending.get(event.causationId);
+
         clearTimeout(request.timer);
+
         pending.delete(event.causationId);
+
         if (event.payload.error) {
           const e = event.payload.error;
+
           request.reject(new ApiError(e.status, e.code, e.message));
-        } else request.resolve(event.payload);
+        } else {
+          request.resolve(event.payload);
+        }
       }
+
       await consumer.commitOffsets([
         { topic, partition, offset: (BigInt(message.offset) + 1n).toString() },
       ]);
     },
   });
+
   return {
     async command(service, type, payload, context) {
       const message = envelope(
@@ -125,9 +153,11 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
         payload,
         context,
       );
+
       return new Promise((resolve, reject) => {
         const timer = setTimeout(() => {
           pending.delete(message.messageId);
+
           reject(
             new ApiError(
               503,
@@ -136,10 +166,14 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
             ),
           );
         }, timeoutMs);
+
         pending.set(message.messageId, { resolve, reject, timer });
+
         publish(`etiquete.${service}.commands`, message).catch((error) => {
           clearTimeout(timer);
+
           pending.delete(message.messageId);
+
           reject(new ApiError(503, 'DEPENDENCY_UNAVAILABLE', error.message));
         });
       });
@@ -147,10 +181,14 @@ export async function createKafkaTransport({ name, handler, brokers, timeoutMs =
     async close() {
       for (const request of pending.values()) {
         clearTimeout(request.timer);
+
         request.reject(new ApiError(503, 'DEPENDENCY_UNAVAILABLE', 'Transporte encerrado.'));
       }
+
       pending.clear();
+
       await consumer.disconnect();
+
       await producer.disconnect();
     },
   };

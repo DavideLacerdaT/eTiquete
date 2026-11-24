@@ -1,0 +1,223 @@
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 28px 0;
+  gap: 20px;
+}
+
+.filter-chips {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  font-size: 0.875rem;
+  background: none;
+}
+
+.chip.active {
+  color: var(--canvas);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.event-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.event-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.poster-button {
+  padding: 0;
+  width: 100%;
+  display: block;
+  position: relative;
+  text-align: inherit;
+}
+
+.poster-button:hover .poster-icon {
+  transform: rotate(-8deg) scale(1.07);
+  transition: transform 0.2s ease;
+}
+
+.poster-category {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  font-size: 0.75rem;
+  border: 1px solid #0004;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.event-card-body {
+  padding: 22px;
+}
+
+.event-card-body .eyebrow {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.event-card-body h2 {
+  font-size: 1.4rem;
+  margin: 8px 0;
+}
+
+.event-card-body p {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-bottom: 14px;
+}
+
+.event-card-body > small {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.event-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  gap: 12px;
+}
+
+.event-card-footer small {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.event-card-footer strong {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.orders-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.order-card {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  text-align: left;
+  padding: 22px;
+  background: var(--surface-muted);
+  border-radius: 17px;
+}
+
+.order-card > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.order-card .poster {
+  width: 66px;
+  height: 66px;
+}
+
+.order-card .eyebrow {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.order-card h3 {
+  font-size: 1.1rem;
+}
+
+.order-card small {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.order-card-status {
+  margin-left: auto;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.order-card-status strong {
+  font-weight: 500;
+}
+
+.order-card:hover {
+  background: #e9e4d6;
+}
+
+.notification-card {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+  padding: 26px 0;
+}
+
+.round-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.notification-card > div {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.notification-card p {
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-size: 0.875rem;
+}
+
+.notification-card .text-button {
+  margin-top: 12px;
+}
+
+.event-details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.event-details > div:last-child {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+}
+
+.event-details .poster {
+  min-height: 280px;
+  border-radius: var(--radius-card);
+}
+
+.session-list {
+  margin: 0;
+  padding-left: 20px;
+}

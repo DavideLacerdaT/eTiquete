@@ -1,0 +1,85 @@
+.poster {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 210px;
+}
+
+.poster-jazz {
+  background: var(--pink);
+}
+
+.poster-theatre {
+  background: var(--blue);
+}
+
+.poster-sun {
+  background: var(--yellow);
+}
+
+.poster-ideas {
+  background: var(--green);
+}
+
+.poster-icon {
+  width: 92px;
+  height: 92px;
+  z-index: 1;
+}
+
+.poster-star {
+  position: absolute;
+  right: 22px;
+  top: 6px;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.poster-caption {
+  position: absolute;
+  bottom: 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+}
+
+.orbit {
+  position: absolute;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  opacity: 0.18;
+  width: 250px;
+  height: 250px;
+}
+
+.orbit-one {
+  top: -80px;
+  left: -130px;
+}
+
+.orbit-two {
+  bottom: -160px;
+  right: -90px;
+  width: 330px;
+  height: 330px;
+}
+
+.poster.small {
+  width: 46px;
+  height: 46px;
+  min-height: 0;
+  border-radius: 11px;
+  flex-shrink: 0;
+}
+
+.poster.small .poster-icon {
+  width: 26px;
+  height: 26px;
+}
+
+.poster.small .orbit,
+.poster.small .poster-star,
+.poster.small .poster-caption {
+  display: none;
+}

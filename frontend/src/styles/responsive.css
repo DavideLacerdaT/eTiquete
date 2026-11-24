@@ -1,0 +1,569 @@
+@media (min-width: 1600px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 38px;
+  }
+
+  .dashboard-aside {
+    padding-left: 30px;
+  }
+
+  .feature-copy {
+    padding: 30px;
+  }
+
+  .event-row {
+    min-height: 72px;
+  }
+}
+
+@media (max-width: 1450px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 24px;
+  }
+
+  .sidebar {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .brand {
+    font-size: 1.5rem;
+  }
+
+  .location {
+    display: none;
+  }
+}
+
+@media (max-width: 1150px) {
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dashboard-aside {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 24px 0 0;
+  }
+
+  .calendar {
+    grid-row: span 2;
+  }
+
+  .next-ticket {
+    margin: 0;
+  }
+
+  .agenda {
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .side-note {
+    display: none;
+  }
+
+  .feature-card > .poster {
+    width: 35%;
+  }
+
+  .service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .event-card-footer {
+    align-items: start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 800px) {
+  .app-shell {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 0;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 12px;
+    top: 12px;
+    bottom: 12px;
+    z-index: 30;
+    width: min(280px, calc(100% - 24px));
+    display: none;
+    box-shadow: 20px 0 80px #0004;
+  }
+
+  .sidebar.open {
+    display: flex;
+  }
+
+  .sidebar-art {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: inline-grid;
+    flex-shrink: 0;
+  }
+
+  .workspace {
+    padding: 0;
+  }
+
+  .content-scroll {
+    padding: 8px 20px 0;
+  }
+
+  .topbar {
+    gap: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .search-hint {
+    display: none;
+  }
+
+  .search-wrap {
+    width: 100%;
+  }
+
+  .topbar-actions {
+    gap: 4px;
+  }
+
+  .topbar-actions .icon-button:last-child {
+    display: none;
+  }
+
+  .page-intro {
+    margin-bottom: 24px;
+  }
+
+  .event-cards {
+    gap: 16px;
+  }
+
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .dialog {
+    padding: 22px;
+    max-height: calc(100dvh - 24px);
+  }
+
+  .checkout-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .purchase-summary {
+    margin-top: 6px;
+  }
+
+  .seat {
+    width: 38px;
+    height: 36px;
+  }
+
+  .feature-copy h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .content-scroll {
+    padding-inline: 12px;
+  }
+
+  .topbar {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .search-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  .search-wrap {
+    gap: 6px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat-card:last-child {
+    grid-column: 1 / -1;
+    min-height: 100px;
+  }
+
+  .stat-card {
+    padding: 12px;
+    min-height: 116px;
+    border-radius: 13px;
+  }
+
+  .stat-card > span:first-child {
+    font-size: 0.75rem;
+  }
+
+  .stat-card > span:first-child svg {
+    display: none;
+  }
+
+  .stat-card > strong {
+    font-size: 2.25rem;
+  }
+
+  .stat-card small {
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .feature-copy {
+    padding: 20px;
+  }
+
+  .feature-card {
+    position: relative;
+  }
+
+  .feature-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .feature-card > .poster {
+    position: absolute;
+    right: -25px;
+    top: 15px;
+    opacity: 0.23;
+    width: 45%;
+    height: 100%;
+  }
+
+  .feature-bottom {
+    gap: 12px;
+  }
+
+  .feature-copy h2 {
+    font-size: 1.75rem;
+  }
+
+  .event-row {
+    gap: 9px;
+    padding-right: 8px;
+  }
+
+  .event-row small {
+    max-width: 160px;
+  }
+
+  .row-price {
+    display: none;
+  }
+
+  .event-row > svg {
+    display: none;
+  }
+
+  .event-date {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+
+  .dashboard-aside {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .calendar {
+    max-width: 340px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .calendar-grid button {
+    font-size: 0.875rem;
+  }
+
+  .agenda {
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+
+  .next-ticket {
+    max-width: 340px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .event-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .event-card-footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: end;
+  }
+
+  .filter-bar {
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    padding: 7px 12px;
+    font-size: 0.875rem;
+    min-height: 40px;
+  }
+
+  .order-card {
+    gap: 12px;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+
+  .order-card .poster {
+    width: 46px;
+    height: 46px;
+  }
+
+  .order-card > svg {
+    display: none;
+  }
+
+  .order-card-status {
+    margin-left: auto;
+  }
+
+  .order-card h3 {
+    font-size: 0.9375rem;
+  }
+
+  .order-card-status strong {
+    font-size: 0.875rem;
+  }
+
+  .notification-card {
+    gap: 12px;
+  }
+
+  .notification-card .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .app-footer {
+    align-items: start;
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+
+  .dialog {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .dialog > header h2 {
+    font-size: 1.4rem;
+  }
+
+  .steps {
+    gap: 14px;
+  }
+
+  .steps > span {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .seat-row {
+    gap: 5px;
+  }
+
+  .seat {
+    width: 28px;
+    height: 30px;
+  }
+
+  .seat-row > span {
+    width: 12px;
+  }
+
+  .seat:nth-child(6) {
+    margin-left: 7px;
+  }
+
+  .seat-legend {
+    gap: 10px;
+    font-size: 0.75rem;
+  }
+
+  .mode-cards,
+  .service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lab-panel {
+    padding: 20px;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .section-heading {
+    gap: 8px;
+  }
+
+  .flow-state {
+    padding: 20px 0;
+  }
+
+  .flow-state h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .event-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Em notebooks baixos, reservar espaço para conteúdo e ações. */
+@media (max-height: 720px) and (min-width: 801px) {
+  .app-shell {
+    height: calc(100dvh - 16px);
+    margin-block: 8px;
+    padding: 10px;
+    border-radius: 22px;
+  }
+
+  .sidebar {
+    padding-block: 18px;
+  }
+
+  .brand {
+    margin-bottom: 20px;
+  }
+
+  .sidebar-tools {
+    margin-top: 16px;
+  }
+
+  .nav-item {
+    padding-block: 10px;
+  }
+
+  .topbar {
+    padding-block: 4px 12px;
+  }
+
+  .page-intro {
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    min-height: 124px;
+    padding: 14px;
+  }
+
+  .stat-card > strong {
+    margin-top: 6px;
+    font-size: 2.25rem;
+  }
+}
+
+@media (max-height: 600px) {
+  .modal-backdrop {
+    padding: 12px;
+  }
+
+  .dialog {
+    max-height: calc(100dvh - 24px);
+    padding: 16px;
+  }
+
+  .dialog > header {
+    margin-bottom: 12px;
+  }
+
+  .dialog > header .eyebrow {
+    display: none;
+  }
+
+  .dialog > header h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .dialog {
+    padding-inline: 12px;
+  }
+
+  .seat-row {
+    gap: 3px;
+  }
+
+  .seat {
+    width: 24px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+
+  .seat:nth-child(6) {
+    margin-left: 4px;
+  }
+
+  .seat-legend {
+    flex-wrap: wrap;
+  }
+
+  .event-row {
+    flex-wrap: wrap;
+  }
+
+  .event-row-info {
+    flex-basis: 130px;
+  }
+
+  .event-date {
+    margin-left: auto;
+  }
+}

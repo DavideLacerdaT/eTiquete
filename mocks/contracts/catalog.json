@@ -323,12 +323,7 @@
               ]
             }
           ],
-          "pagination": {
-            "page": 1,
-            "limit": 20,
-            "totalItems": 4,
-            "totalPages": 1
-          }
+          "pagination": { "page": 1, "limit": 20, "totalItems": 4, "totalPages": 1 }
         }
       },
       "errors": []

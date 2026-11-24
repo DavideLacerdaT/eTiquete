@@ -12,9 +12,12 @@ import {
 import { accepted, createStore, idempotency, ok, taskRunner, wait } from '../core.js';
 
 export function createOrders({ deps, delay = 500 }) {
-  const store = createStore(orders, 'orderId'),
-    once = idempotency(),
-    tasks = taskRunner();
+  const store = createStore(orders, 'orderId');
+
+  const once = idempotency();
+
+  const tasks = taskRunner();
+
   const timelines = new Map(
     orders.map((order) => [
       order.orderId,
@@ -31,6 +34,7 @@ export function createOrders({ deps, delay = 500 }) {
       ],
     ]),
   );
+
   const labels = {
     PENDING: 'Pedido recebido',
     RESERVED: 'Reserva validada',
@@ -41,12 +45,15 @@ export function createOrders({ deps, delay = 500 }) {
     CANCELLED: 'Compra cancelada',
     FAILED: 'Não foi possível concluir',
   };
+
   function move(order, status, sagaStatus = 'RUNNING', extra = {}) {
     Object.assign(order, { status, sagaStatus, ...extra });
+
     timelines
       .get(order.orderId)
       .push({ status, label: labels[status], occurredAt: new Date().toISOString() });
   }
+
   async function notify(order, context) {
     try {
       await deps.command(
@@ -64,10 +71,12 @@ export function createOrders({ deps, delay = 500 }) {
       order.notificationError = error.code || 'DELIVERY_FAILED';
     }
   }
+
   async function compensate(order, context, payment) {
     try {
       if (payment?.status === 'SUCCEEDED') {
         move(order, 'REFUND_PENDING', 'COMPENSATING');
+
         await deps.command(
           'payments',
           'payment.refund',
@@ -75,25 +84,34 @@ export function createOrders({ deps, delay = 500 }) {
           context,
         );
       }
+
       await deps.command(
         'reservations',
         'reservation.release',
         { orderId: order.orderId, reservationId: order.reservationId, reason: order.failureCode },
         context,
       );
+
       move(order, 'CANCELLED', 'COMPENSATED');
+
       await notify(order, context);
     } catch (error) {
       order.sagaStatus = 'MANUAL_INTERVENTION';
+
       order.lastError = error.code || 'DEPENDENCY_UNAVAILABLE';
     }
   }
+
   async function runSaga(order, context) {
     let payment;
+
     try {
       await wait(delay);
+
       move(order, 'RESERVED');
+
       move(order, 'PAYMENT_PENDING');
+
       payment = await deps.command(
         'payments',
         'payment.charge',
@@ -106,34 +124,45 @@ export function createOrders({ deps, delay = 500 }) {
         },
         context,
       );
+
       order.paymentId = payment.paymentId;
+
       if (payment.status !== 'SUCCEEDED') {
         order.failureCode = payment.failureCode || 'PAYMENT_DECLINED';
+
         return compensate(order, context);
       }
+
       move(order, 'PAID');
+
       await deps.command(
         'reservations',
         'reservation.confirm',
         { orderId: order.orderId, reservationId: order.reservationId },
         context,
       );
+
       move(order, 'CONFIRMED', 'COMPLETED', { confirmedAt: new Date().toISOString() });
+
       await notify(order, context);
     } catch (error) {
       order.failureCode = error.code || 'DEPENDENCY_UNAVAILABLE';
       // Timeout pode esconder uma cobrança concluída. Não declarar compensação sem evidência.
+
       if (!payment && error.status >= 500) {
         order.sagaStatus = 'MANUAL_INTERVENTION';
+
         return;
       }
+
       await compensate(order, context, payment);
     }
   }
+
   return {
     settled: tasks.settled,
     async handle(method, parts, body, context, query) {
-      if (method === 'GET' && parts.length === 1)
+      if (method === 'GET' && parts.length === 1) {
         return ok(
           paginate(
             store
@@ -143,14 +172,22 @@ export function createOrders({ deps, delay = 500 }) {
             query,
           ),
         );
-      if (method === 'GET' && parts.length === 2) return ok(store.get(parts[1]));
+      }
+
+      if (method === 'GET' && parts.length === 2) {
+        return ok(store.get(parts[1]));
+      }
+
       if (method === 'GET' && parts[2] === 'timeline' && parts.length === 3) {
         store.get(parts[1]);
+
         return ok({ orderId: parts[1], items: timelines.get(parts[1]) });
       }
-      if (method === 'POST' && parts.length === 1)
+
+      if (method === 'POST' && parts.length === 1) {
         return once('create', body, context, async () => {
           validateItems(body.items);
+
           requireValue(
             isUuid(body.reservationId) &&
               typeof body.username === 'string' &&
@@ -158,7 +195,11 @@ export function createOrders({ deps, delay = 500 }) {
               body.paymentMethod === 'SIMULATED',
             'Revise os dados do pedido.',
           );
-          if (!context.admissionToken) fail(403, 'ADMISSION_REQUIRED', 'A admissão é obrigatória.');
+
+          if (!context.admissionToken) {
+            fail(403, 'ADMISSION_REQUIRED', 'A admissão é obrigatória.');
+          }
+
           await deps.request(
             'admissions',
             'POST',
@@ -166,6 +207,7 @@ export function createOrders({ deps, delay = 500 }) {
             { token: context.admissionToken },
             context,
           );
+
           const reservation = (
             await deps.request(
               'reservations',
@@ -175,21 +217,30 @@ export function createOrders({ deps, delay = 500 }) {
               context,
             )
           ).body;
+
           if (
             reservation.status === 'EXPIRED' ||
             (reservation.status === 'HELD' && Date.parse(reservation.expiresAt) <= Date.now())
-          )
+          ) {
             fail(410, 'RESERVATION_EXPIRED', 'A reserva expirou. Selecione os lugares novamente.');
-          if (reservation.status !== 'HELD')
+          }
+
+          if (reservation.status !== 'HELD') {
             fail(409, 'INVALID_STATE_TRANSITION', 'A reserva não está ativa.');
+          }
+
           requireValue(
             reservation.username === body.username &&
               canonical(reservation.items) === canonical(body.items),
             'O pedido deve conter os mesmos itens e usuário da reserva.',
           );
-          if (store.list().some((o) => o.reservationId === body.reservationId))
+
+          if (store.list().some((o) => o.reservationId === body.reservationId)) {
             fail(409, 'INVALID_STATE_TRANSITION', 'Esta reserva já está vinculada a um pedido.');
+          }
+
           const orderId = uuid();
+
           const order = store.put({
             orderId,
             sagaId: orderId,
@@ -202,30 +253,44 @@ export function createOrders({ deps, delay = 500 }) {
             createdAt: new Date().toISOString(),
             correlationId: context.correlationId,
           });
+
           timelines.set(orderId, [
             { status: 'PENDING', label: labels.PENDING, occurredAt: order.createdAt },
           ]);
+
           const response = accepted(order);
+
           tasks.run(() => runSaga(order, context));
+
           return response;
         });
-      if (method === 'POST' && parts[2] === 'cancel' && parts.length === 3)
+      }
+
+      if (method === 'POST' && parts[2] === 'cancel' && parts.length === 3) {
         return once(`cancel:${parts[1]}`, body, context, async () => {
           const order = store.get(parts[1]);
+
           requireValue(body.reason === 'CUSTOMER_REQUEST', 'Informe o motivo CUSTOMER_REQUEST.');
+
           if (
             order.status === 'REFUND_PENDING' ||
             (order.status === 'CANCELLED' && order.cancelReason)
-          )
+          ) {
             return accepted(order);
-          if (order.status !== 'CONFIRMED')
+          }
+
+          if (order.status !== 'CONFIRMED') {
             fail(
               409,
               'INVALID_STATE_TRANSITION',
               'Somente compras confirmadas podem ser canceladas.',
             );
+          }
+
           order.cancelReason = body.reason;
+
           move(order, 'REFUND_PENDING', 'COMPENSATING');
+
           tasks.run(async () => {
             try {
               await deps.command(
@@ -234,21 +299,28 @@ export function createOrders({ deps, delay = 500 }) {
                 { orderId: order.orderId, paymentId: order.paymentId, reason: body.reason },
                 context,
               );
+
               await deps.command(
                 'reservations',
                 'reservation.cancel',
                 { orderId: order.orderId, reservationId: order.reservationId, reason: body.reason },
                 context,
               );
+
               move(order, 'CANCELLED', 'COMPENSATED');
+
               await notify(order, context);
             } catch (error) {
               order.lastError = error.code || 'DEPENDENCY_UNAVAILABLE';
+
               order.sagaStatus = 'MANUAL_INTERVENTION';
             }
           });
+
           return accepted(order);
         });
+      }
+
       return notFound();
     },
   };

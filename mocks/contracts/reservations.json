@@ -2225,6 +2225,73 @@
   "examples": [
     {
       "request": {
+        "method": "GET",
+        "path": "/api/v1/reservations?username=marina",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001",
+          "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
+          "X-Admission-Token": "fixture-admission-token"
+        },
+        "body": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Correlation-Id": "00000009-0000-4000-8000-000000000001"
+        },
+        "body": {
+          "items": [
+            {
+              "reservationId": "00000005-0000-4000-8000-000000000001",
+              "username": "marina",
+              "items": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000003",
+                  "seatIds": ["00000004-0000-4000-8000-000000000204"]
+                }
+              ],
+              "status": "CONFIRMED",
+              "expiresAt": "2026-11-18T18:10:00Z",
+              "confirmedAt": "2026-11-18T18:01:00Z",
+              "amountCents": 8000,
+              "orderId": "00000006-0000-4000-8000-000000000001"
+            },
+            {
+              "reservationId": "00000005-0000-4000-8000-000000000002",
+              "username": "marina",
+              "items": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000001",
+                  "seatIds": ["00000004-0000-4000-8000-000000000002"]
+                }
+              ],
+              "status": "EXPIRED",
+              "expiresAt": "2026-11-18T17:10:00Z",
+              "amountCents": 12000
+            },
+            {
+              "reservationId": "00000005-0000-4000-8000-000000000003",
+              "username": "marina",
+              "items": [
+                {
+                  "sessionId": "00000002-0000-4000-8000-000000000004",
+                  "seatIds": ["00000004-0000-4000-8000-000000000302"]
+                }
+              ],
+              "status": "RELEASED",
+              "expiresAt": "2026-11-17T17:10:00Z",
+              "amountCents": 16000
+            }
+          ],
+          "pagination": { "page": 1, "limit": 20, "totalItems": 3, "totalPages": 1 }
+        }
+      },
+      "errors": []
+    },
+    {
+      "request": {
         "method": "POST",
         "path": "/api/v1/reservations",
         "headers": {
@@ -2344,9 +2411,7 @@
           "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
           "X-Admission-Token": "fixture-admission-token"
         },
-        "body": {
-          "orderId": "00000006-0000-4000-8000-000000000003"
-        }
+        "body": { "orderId": "00000006-0000-4000-8000-000000000003" }
       },
       "response": {
         "status": 200,
@@ -2393,9 +2458,7 @@
           "Idempotency-Key": "00000009-0000-4000-8000-000000000002",
           "X-Admission-Token": "fixture-admission-token"
         },
-        "body": {
-          "reason": "PAYMENT_DECLINED"
-        }
+        "body": { "reason": "PAYMENT_DECLINED" }
       },
       "response": {
         "status": 200,

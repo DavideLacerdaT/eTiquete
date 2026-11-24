@@ -145,9 +145,7 @@
           "username": "marina",
           "customerId": null,
           "template": "ORDER_CONFIRMED",
-          "data": {
-            "amountCents": 8000
-          }
+          "data": { "amountCents": 8000 }
         }
       }
     }

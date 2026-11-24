@@ -64,12 +64,13 @@ Abra **http://localhost:5173**. O frontend React inclui painel, catálogo, agend
 Cada microsserviço pode executar sozinho (`pnpm dev:service orders`, por exemplo). Os adaptadores aceitam `mock`/`live` por dependência, sem fallback silencioso. Para uma compra entre vários processos, use o hub compartilhado (`pnpm dev:mocks`).
 
 - [Guia completo de execução, modos e contratos complementares](docs/desenvolvimento.md)
+- [Estrutura React, rotas e contrato inicial com o Gateway](docs/frontend-gateway.md)
 - [Padrões de interface baseados na referência visual](docs/padroes-interface.md)
 - [Regra arquitetural dos adaptadores](docs/adr/0003-mocks-e-adaptadores.md)
 - [Exemplos estáticos por microsserviço](mocks/contracts/)
 - [Regras obrigatórias de contribuição](AGENTS.md)
 
-`pnpm test` verifica os contratos e fluxos; `pnpm build` gera `frontend/dist`. **Os serviços novos são simuladores em memória**, inclusive quando se comunicam por HTTP/Kafka reais. PostgreSQL, Inbox/Outbox transacionais e recuperação de produção continuam como trabalho de cada domínio.
+`pnpm format` padroniza a apresentação do código e `pnpm format:check` confere a formatação. `pnpm test` verifica os contratos e fluxos; `pnpm build` gera `frontend/dist`. **Os serviços novos são simuladores em memória**, inclusive quando se comunicam por HTTP/Kafka reais. PostgreSQL, Inbox/Outbox transacionais e recuperação de produção continuam como trabalho de cada domínio.
 
 ### Contêineres
 
