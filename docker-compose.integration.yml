@@ -32,7 +32,9 @@ services:
     environment: *live
     depends_on: *ready
   reservations:
-    environment: *live
+    environment:
+      <<: *live
+      RESERVATIONS_SEED_DEMO: ${RESERVATIONS_SEED_DEMO:-true}
     depends_on: *ready
   orders:
     environment: *live

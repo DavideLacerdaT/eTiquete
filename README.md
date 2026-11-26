@@ -70,7 +70,7 @@ Cada microsserviço pode executar sozinho (`pnpm dev:service orders`, por exempl
 - [Exemplos estáticos por microsserviço](mocks/contracts/)
 - [Regras obrigatórias de contribuição](AGENTS.md)
 
-`pnpm format` padroniza a apresentação do código e `pnpm format:check` confere a formatação. `pnpm test` verifica os contratos e fluxos; `pnpm build` gera `frontend/dist`. **Os serviços novos são simuladores em memória**, inclusive quando se comunicam por HTTP/Kafka reais. PostgreSQL, Inbox/Outbox transacionais e recuperação de produção continuam como trabalho de cada domínio.
+`pnpm format` padroniza a apresentação do código e `pnpm format:check` confere a formatação. `pnpm test` verifica os contratos e fluxos; `pnpm build` gera `frontend/dist`. Catálogo e Reservas possuem armazenamento PostgreSQL quando seus modos são `live`; os demais serviços ainda usam simuladores em memória. Inbox/Outbox transacionais, autenticação e recuperação de produção continuam pendentes.
 
 ### Contêineres
 

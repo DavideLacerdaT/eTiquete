@@ -35,15 +35,21 @@ const deps = createDependencies({
   },
 });
 
-let catalog;
+let persistent;
 
 if (name === 'catalog' && config.dependencies.catalog.mode === 'live') {
   const { openPostgresCatalog } = await import('./catalog/postgres.mjs');
 
-  catalog = await openPostgresCatalog(process.env, config.timeoutMs);
+  persistent = await openPostgresCatalog(process.env, config.timeoutMs);
 }
 
-const handler = catalog?.handler ?? factories[name]({ deps });
+if (name === 'reservations' && config.dependencies.reservations.mode === 'live') {
+  const { openPostgresReservations } = await import('./reservations/postgres.mjs');
+
+  persistent = await openPostgresReservations(process.env, config.timeoutMs, deps);
+}
+
+const handler = persistent?.handler ?? factories[name]({ deps });
 
 if (process.env.MESSAGING_MODE === 'kafka') {
   const { createKafkaTransport } = await import('./kafka.mjs');
@@ -63,14 +69,14 @@ if (process.env.MESSAGING_MODE === 'kafka') {
 
 const server = createHttpServer(async ({ method, url, body, context }) => {
   if (url.pathname === '/health') {
-    await catalog?.check();
+    await persistent?.check();
 
     return {
       status: 200,
       body: {
         status: 'ok',
         service: name,
-        implementation: catalog ? 'postgres' : 'development-simulator',
+        implementation: persistent ? 'postgres' : 'development-simulator',
       },
     };
   }
@@ -96,12 +102,12 @@ const port = Number(process.env.PORT || 3011 + services.indexOf(name));
 
 server.listen(port, process.env.HOST || '127.0.0.1', () =>
   console.log(
-    `${name}: http://127.0.0.1:${port} (${catalog ? 'PostgreSQL' : 'simulador de desenvolvimento'})`,
+    `${name}: http://127.0.0.1:${port} (${persistent ? 'PostgreSQL' : 'simulador de desenvolvimento'})`,
   ),
 );
 
 process.on('SIGTERM', () => {
   server.close(async () => {
-    await Promise.all([catalog?.close(), kafka?.close()]);
+    await Promise.all([persistent?.close(), kafka?.close()]);
   });
 });

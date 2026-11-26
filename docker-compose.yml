@@ -95,6 +95,14 @@ services:
       <<: *dependencies
       SERVICE_NAME: reservations
       MOCK_BASE_URL: http://mock-hub:3090
+      RESERVATIONS_DATABASE_URL: ${RESERVATIONS_DATABASE_URL:-}
+      RESERVATIONS_SEED_DEMO: ${RESERVATIONS_SEED_DEMO:-false}
+      PGHOST: postgres
+      PGUSER: ${POSTGRES_USER:-etiquete}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-etiquete}
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports: ['127.0.0.1:3013:3013']
 
   orders:

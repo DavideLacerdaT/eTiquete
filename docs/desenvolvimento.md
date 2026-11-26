@@ -1,6 +1,6 @@
 # Desenvolvimento independente e integração
 
-Esta base implementa o frontend React e **simuladores de desenvolvimento** para os seis domínios, além do Gateway. Não substitui as implementações persistentes dos serviços. O backend anterior continua disponível em `/api/`; os contratos novos usam `/api/v1`.
+Esta base implementa o frontend React, **simuladores de desenvolvimento** para os seis domínios e o Gateway. Catálogo e Reservas também têm armazenamento PostgreSQL em modo live. Ainda faltam garantias de produção para a compra distribuída. O backend anterior continua disponível em `/api/`; os contratos novos usam `/api/v1`.
 
 ## Início rápido
 
@@ -50,6 +50,7 @@ Copie `.env.example` para `.env` e ajuste. Vite lê variáveis `VITE_*` na pasta
 | `shared/config.js` | Política de configuração comum |
 | `shared/dependencies.js` | Adaptador mock/HTTP/Kafka por dependência |
 | `services/server.mjs` | Processo independente de um domínio |
+| `services/reservations/` | Esquema e adaptador PostgreSQL do inventário e das reservas |
 | `services/gateway/server.mjs` | Entrada única e roteamento da API |
 | `services/kafka.mjs` | Transporte real de comandos/resultados para desenvolvimento |
 | `scripts/mock-hub.mjs` | Rede compartilhada de mocks para vários processos |
@@ -111,7 +112,7 @@ O primeiro comando formata o código; o segundo apenas verifica. Dependências, 
 | `KAFKA_BROKERS` | Lista separada por vírgulas |
 | `SERVICE_NAME`, `PORT`, `HOST` | Domínio e bind do processo |
 
-“Live” significa **comunicação real com o endpoint/broker configurado**. Os processos fornecidos ainda são simuladores em memória. A troca de fonte não transforma memória em PostgreSQL. Erro real retorna `503 DEPENDENCY_UNAVAILABLE`; nunca há fallback para um sucesso fictício.
+“Live” significa **comunicação real com o endpoint/broker configurado**. Catálogo e Reservas usam PostgreSQL exclusivo quando seus próprios modos são `live`; os demais processos ainda são simuladores em memória. Erro real retorna `503 DEPENDENCY_UNAVAILABLE`; nunca há fallback para um sucesso fictício.
 
 ### Um serviço por vez
 
@@ -184,6 +185,14 @@ Invoke-RestMethod http://localhost:8080/api/v1/events
 ```
 
 A carga de demonstração insere somente registros ausentes, sem sobrescrever dados existentes. Para usar um banco externo, informe `CATALOG_DATABASE_URL` com a conexão ao banco do Catalog. Em execução local fora do Compose, também é possível usar `PGHOST`, `PGPORT`, `PGUSER` e `PGPASSWORD`.
+
+#### Reservas com PostgreSQL
+
+`RESERVATIONS_MODE=live` no processo de Reservas ativa `services/reservations/postgres.mjs` e aplica `services/reservations/schema.sql` ao banco exclusivo `reservation`. Defina `RESERVATIONS_SEED_DEMO=true` para inserir o mapa de demonstração somente onde ainda não existe assento. `RESERVATIONS_DATABASE_URL` permite apontar para outro banco. O perfil de integração já ativa o modo live e a carga de demonstração.
+
+O inventário tem chave `(session_id, seat_id)`, preço em centavos e estados `AVAILABLE`, `HELD` e `SOLD`. A reserva guarda `HELD`, `CONFIRMED`, `RELEASED` ou `EXPIRED`, seus itens, prazo e vínculo opcional com o pedido. Aquisição bloqueia as linhas de assento em ordem estável e grava todos os itens na mesma transação; conflito aborta a compra inteira. Expiração é reconciliada dentro das consultas e comandos, com `expires_at` do PostgreSQL como fonte de verdade. Chave HTTP e resposta de criação são persistidas para repetição idempotente. Cancelar uma reserva confirmada marca `cancelledAt` e mantém os assentos vendidos.
+
+Esta etapa implementa a modelagem e as transições locais. Publicação transacional via Outbox, Inbox para mensagens, expiração em segundo plano, autenticação e recuperação após falhas da SAGA ainda não estão implementadas; o serviço não deve ser tratado como pronto para produção. O teste de concorrência no PostgreSQL usa `RESERVATIONS_TEST_DATABASE_URL` e é ignorado quando não há banco de teste configurado.
 
 ## Cenários
 
