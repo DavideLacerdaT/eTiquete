@@ -35,7 +35,15 @@ const deps = createDependencies({
   },
 });
 
-const handler = factories[name]({ deps });
+let catalog;
+
+if (name === 'catalog' && config.dependencies.catalog.mode === 'live') {
+  const { openPostgresCatalog } = await import('./catalog/postgres.mjs');
+
+  catalog = await openPostgresCatalog(process.env, config.timeoutMs);
+}
+
+const handler = catalog?.handler ?? factories[name]({ deps });
 
 if (process.env.MESSAGING_MODE === 'kafka') {
   const { createKafkaTransport } = await import('./kafka.mjs');
@@ -55,9 +63,15 @@ if (process.env.MESSAGING_MODE === 'kafka') {
 
 const server = createHttpServer(async ({ method, url, body, context }) => {
   if (url.pathname === '/health') {
+    await catalog?.check();
+
     return {
       status: 200,
-      body: { status: 'ok', service: name, implementation: 'development-simulator' },
+      body: {
+        status: 'ok',
+        service: name,
+        implementation: catalog ? 'postgres' : 'development-simulator',
+      },
     };
   }
 
@@ -81,11 +95,13 @@ const server = createHttpServer(async ({ method, url, body, context }) => {
 const port = Number(process.env.PORT || 3011 + services.indexOf(name));
 
 server.listen(port, process.env.HOST || '127.0.0.1', () =>
-  console.log(`${name}: http://127.0.0.1:${port} (simulador de desenvolvimento)`),
+  console.log(
+    `${name}: http://127.0.0.1:${port} (${catalog ? 'PostgreSQL' : 'simulador de desenvolvimento'})`,
+  ),
 );
 
-process.on('SIGTERM', async () => {
-  server.close();
-
-  await kafka?.close();
+process.on('SIGTERM', () => {
+  server.close(async () => {
+    await Promise.all([catalog?.close(), kafka?.close()]);
+  });
 });

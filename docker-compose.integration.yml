@@ -1,4 +1,4 @@
-# Usa os simuladores em processos separados, HTTP e Kafka reais.
+# Usa o Catalog com PostgreSQL e os demais serviços com HTTP e Kafka reais.
 # docker compose --profile microservices -f docker-compose.yml -f docker-compose.integration.yml up --build
 x-live: &live
   DATA_MODE: live
@@ -24,7 +24,9 @@ services:
     environment: *live
     depends_on: *ready
   catalog:
-    environment: *live
+    environment:
+      <<: *live
+      CATALOG_SEED_DEMO: ${CATALOG_SEED_DEMO:-true}
     depends_on: *ready
   admissions:
     environment: *live

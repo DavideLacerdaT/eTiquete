@@ -168,6 +168,23 @@ docker compose --profile microservices -f docker-compose.yml -f docker-compose.i
 
 Escolha Gateway HTTP na interface. Este perfil é de desenvolvimento, com **uma instância por domínio**. O broker precisa estar saudável antes dos consumidores iniciarem. O endpoint `/_mock/commands` só existe no hub e não é publicado no Nginx. As portas diretas dos serviços são ligadas apenas a `127.0.0.1`.
 
+#### Catalog com PostgreSQL
+
+O modo `CATALOG_MODE=live` atende pelo banco exclusivo `catalog`. Na inicialização, o serviço aplica o [esquema](../services/catalog/schema.sql) e só começa a aceitar consultas depois que o banco responde. A listagem e os detalhes públicos incluem apenas eventos publicados e suas sessões. O inventário de assentos continua no serviço de Reservas.
+
+Para testar o Catalog pelo Gateway no PowerShell usando os dados de demonstração:
+
+```powershell
+$env:CATALOG_MODE = 'live'
+$env:CATALOG_SEED_DEMO = 'true'
+docker compose --profile microservices up -d --build catalog nginx
+docker compose restart nginx
+Invoke-RestMethod http://localhost:3011/health
+Invoke-RestMethod http://localhost:8080/api/v1/events
+```
+
+A carga de demonstração insere somente registros ausentes, sem sobrescrever dados existentes. Para usar um banco externo, informe `CATALOG_DATABASE_URL` com a conexão ao banco do Catalog. Em execução local fora do Compose, também é possível usar `PGHOST`, `PGPORT`, `PGUSER` e `PGPASSWORD`.
+
 ## Cenários
 
 | Cenário | Resultado observável |

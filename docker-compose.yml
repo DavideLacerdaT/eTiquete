@@ -69,6 +69,14 @@ services:
       <<: *dependencies
       SERVICE_NAME: catalog
       MOCK_BASE_URL: http://mock-hub:3090
+      CATALOG_DATABASE_URL: ${CATALOG_DATABASE_URL:-}
+      PGHOST: postgres
+      PGUSER: ${POSTGRES_USER:-etiquete}
+      PGPASSWORD: ${POSTGRES_PASSWORD:-etiquete}
+      CATALOG_SEED_DEMO: ${CATALOG_SEED_DEMO:-false}
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports: ['127.0.0.1:3011:3011']
 
   admissions:
